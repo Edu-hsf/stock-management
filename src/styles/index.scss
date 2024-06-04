@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --light-green: #0BD692;
+    --orange: #FF9500;
+    --white-secondary: #F2F2F2;
+}
+
+.btn-light-green {
+    border: 1px solid var(--light-green);
+    color: var(--light-green);
+
+    &:hover {
+        background-color: var(--light-green);
+        color: #fff;
+    }
+}
+
+.btn-orange {
+    border: 1px solid var(--orange);
+    color: var(--orange);
+
+    &:hover {
+        background-color: var(--orange);
+        color: #fff;
+    }
+}

@@ -1,0 +1,36 @@
+#side_nav {
+    background-color: var(--white-secondary);
+    min-width: 250px;
+    min-height: 250px;
+}
+
+.header-box {
+    .rounded {
+        background-color: var(--light-green);
+    }
+}
+
+.content {
+    min-height: 100vh;
+    width: 100%;
+}
+
+li {
+    .icon {
+        color: #494949;
+        font-weight: 500;
+    
+        i {
+            color: var(--light-green);
+        }
+    }
+    .active {
+        background-color: var(--orange);
+        border-radius: 8px;
+        color: #fff;
+    
+        i {
+            color: #fff;
+        }
+    }
+}
