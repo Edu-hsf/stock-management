@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import { ActiveThemeItem } from "../../Context/ActiveThemeItemContext"
+import { ActiveThemeItemContext } from "../../Context/ActiveThemeItemContext"
 
 export default function ThemeList(props) {
-    const {activeThemeItem, setActiveThemeItem} = useContext(ActiveThemeItem)
+    const {activeThemeItem, setActiveThemeItem} = useContext(ActiveThemeItemContext)
     const [active, setActive] = useState('')
 
     useEffect(() => {

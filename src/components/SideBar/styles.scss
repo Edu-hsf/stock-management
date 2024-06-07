@@ -4,15 +4,14 @@
     min-height: 250px;
 }
 
+.sidebar {
+    height: 100vh;
+}
+
 .header-box {
     .rounded {
         background-color: var(--light-green);
     }
-}
-
-.content {
-    min-height: 100vh;
-    width: 100%;
 }
 
 .item {
@@ -63,5 +62,11 @@
         &:hover {
             background-color: var(--orange);
         }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .sidebar {
+        position: absolute;
     }
 }
