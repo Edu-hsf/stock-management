@@ -1,8 +1,143 @@
 #dashboard {
     height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;    
+    background-color: var(--white-secondary);
+
+    .search-bar {
+        width: 670px;
+        height: 50px;
+        display: flex;
+
+        .search-input {
+            border: none;
+            border-radius: 8px 0px 0px 8px;
+        }
+
+        .search-button {
+            border: none;
+            border-left: 1px solid rgb(226, 226, 226);
+            border-radius: 0px 8px 8px 0px;
+            background-color: #fff;
+        }
+    }
+
+    .title {
+        height: 65px;
+        border-radius: 8px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+    }
+
+    .section {
+        .container-fluid {
+            .box {
+                display: flex;
+                justify-content: center;
+
+                div {
+                    height: 200px;
+                    width: 300px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    background-color: #fff;
+                    border-radius: 8px;
+                }
+
+            }
+
+            hr {
+                border: 2px solid black;
+                border-radius: 10px;
+            }
+
+            .dropdown {
+                
+                .btn {
+                    background-color: var(--orange);
+                    border: none;
+                    border-radius: 8px;
+                    height: 60px;
+                    font-size: 20px;
+                }
+
+                .dropdown-menu {
+                    max-height: 310px;
+                    overflow: auto;
+
+                    
+
+                    .dropdown-item {
+                        border-radius: 8px;
+                        border: none;
+                        flex-wrap: wrap;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #d8d5d5;
+                        }
+
+                        .item-name {
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+
+                        .item-id {
+                            font-size: 13px;
+                        }
+
+                        .stock-name {
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+
+                        .stock-id {
+                            font-size: 13px;
+                        }
+
+                        button {
+                            border: none;
+                            border-radius: 8px;
+                            background-color: var(--light-green);
+                            color: #fff;
+                            font-size: 12px;
+                            width: 60px;
+                            height: 35px;
+                            margin-top: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1999px) {
+    
+}
+
+@media screen and (max-width: 991px) {
+    #dashboard {
+        .search-bar {
+            width: auto;
+        }
+
+        // .section {
+        //     .container-fluid {
+        //         .dropdown {
+        //             .dropdown-menu {
+        //                 .dropdown-item {
+        //                     button {
+        //                         width: 70px;
+        //                         font-size: 10px;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+    }
 }

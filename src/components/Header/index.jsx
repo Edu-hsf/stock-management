@@ -9,16 +9,16 @@ export default function Header() {
     
     return (
         <header className="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "var(--white-secondary)", borderBottom: "1px solid #BDBEBF" }}>
+            <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid px-4">
                     <div className="d-flex">
 
-                        <button onClick={() => changeSideBar()} className="btn d-lg-none me-3" style={{ color: "var(--light-green)" }}><i class="fa-solid fa-bars"></i></button>
+                        <button onClick={() => changeSideBar()} className="btn d-xl-none me-3" style={{ color: "var(--light-green)" }}><i class="fa-solid fa-bars"></i></button>
 
-                        <Link to="/" className="text-light">
+                        <Link to="/" className="text-decoration-none">
                             <div class="navbar-brand">
                                 <img src={logo} alt="logo" width="40" height="40" className="me-2" />
-                                Stock
+                                My Stock
                             </div>
                         </Link>
                     </div>
