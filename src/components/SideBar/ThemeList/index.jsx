@@ -5,15 +5,12 @@ export default function ThemeList(props) {
     const {activeThemeItem, setActiveThemeItem} = useContext(ActiveThemeItemContext)
     const [active, setActive] = useState('')
 
-    useEffect(() => {
-        if (activeThemeItem !== props.id) {
-            setActive('')
-        }   
-    }, [activeThemeItem])
+    useEffect(() => activeThemeItem !== props.id ? setActive('') : setActive('active'), [activeThemeItem])
 
     const handleClick = () => {
         setActive('active')
         setActiveThemeItem(props.id)
+        sessionStorage.setItem('activeTheme', props.id)
     } 
 
     return (

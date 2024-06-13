@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import './styles.scss'
+import Title from '../../components/Title';
 
 export default function DashBoard() {
     google.charts.load("current", { packages: ["corechart"] });
@@ -41,37 +42,7 @@ export default function DashBoard() {
             id: 4,
             name: 'Eletrodomésticos',
             stockID: 491834887412
-        },
-        {
-            id: 4,
-            name: 'Eletrodomésticos',
-            stockID: 491834887412
-        },
-        {
-            id: 4,
-            name: 'Eletrodomésticos',
-            stockID: 491834887412
-        },
-        {
-            id: 4,
-            name: 'Eletrodomésticos',
-            stockID: 491834887412
-        },
-        {
-            id: 4,
-            name: 'Eletrodomésticos',
-            stockID: 491834887412
-        },
-        {
-            id: 4,
-            name: 'Eletrodomésticos',
-            stockID: 491834887412
-        },
-        {
-            id: 4,
-            name: 'Eletrodomésticos',
-            stockID: 491834887412
-        },
+        }
     ]
 
     const items = [
@@ -115,7 +86,7 @@ export default function DashBoard() {
                 </button>
             </div>
 
-            <h2 className="title mt-4 mb-4 ps-3 fw-1 shadow-sm">Hello, Eduardo Fernandes</h2>
+            <Title>Hello, Eduardo Fernandes</Title>
 
             <div className="section">
                 <div className='row mb-4'>
@@ -137,23 +108,23 @@ export default function DashBoard() {
                 <div className='row'>
                     <div className="dropdown dropdown-items col-sm w-100">
                         <button className="btn btn-secondary dropdown-toggle w-100 shadow-sm" type="button" id="dropDownDashBoardItems" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-brands fa-stack-overflow"></i> Stored items
+                            <i className="fa-brands fa-stack-overflow"></i> Stored items
                         </button>
                         <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardItems">
                             {items.map((item) => (
-                                <Link to='/' className='text-decoration-none'>
+                                <div key={item.id}>
                                     <li className="dropdown-item d-flex justify-content-between">
                                         <div>
                                             <div className='item-name'>{item.name}</div>
                                             <div className='item-id'>ID: {item.itemID}</div>
                                         </div>
+
                                         <Link to='/'>
                                             <button className='view-stock'>View</button>
                                         </Link>
-
                                     </li>
                                     <hr />
-                                </Link>
+                                </div>
                             ))}
                         </ul>
                     </div>
@@ -164,7 +135,7 @@ export default function DashBoard() {
                         </button>
                         <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardStocks">
                             {stocks.map((stock) => (
-                                <Link to='/' className='text-decoration-none'>
+                                <div key={stock.id}>
                                     <li className="dropdown-item d-flex justify-content-between">
                                         <div>
                                             <div className='stock-name'>{stock.name}</div>
@@ -176,7 +147,7 @@ export default function DashBoard() {
 
                                     </li>
                                     <hr />
-                                </Link>
+                                </div>
                             ))}
                         </ul>
                     </div>

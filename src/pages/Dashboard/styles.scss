@@ -25,14 +25,6 @@ body {
         }
     }
 
-    .title {
-        height: 65px;
-        border-radius: 8px;
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-    }
-
     .section {
         .box {
             display: flex;
@@ -187,10 +179,6 @@ body {
 
 @media screen and (max-width: 470px) {
     #dashboard {
-        .title {
-            font-size: 20px;
-        }
-
         .section {
             .box {
                 

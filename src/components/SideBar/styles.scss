@@ -1,51 +1,43 @@
-#side_nav {
-    background-color: #fff;
-    min-width: 250px;
-    min-height: 250px;
-}
-
 .sidebar {
     height: 100vh;
-}
+    background-color: #fff;
+    min-width: 250px;
 
-.header-box {
-    .rounded {
-        background-color: var(--light-green);
-    }
-}
-
-.item {
-    color: #494949;;
-    font-weight: 500;
+    .item {
+        color: #494949;;
+        font-weight: 500;
+        
     
-
-    i {
-        color: var(--light-green);
+        i {
+            color: var(--light-green);
+        }
+    
+        &:hover {
+            background-color: #d8d5d5;
+            border-radius: 8px;
+            cursor: pointer;
+        }
     }
-
-    &:hover {
-        background-color: #d8d5d5;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-}
-.active {
-    background-color: var(--orange);
-    border-radius: 8px;
-    color: #fff;
-
-    i {
-        color: #fff;
-    }
-
-    &:hover {
+    .active {
         background-color: var(--orange);
+        border-radius: 8px;
+        color: #fff;
+    
+        i {
+            color: #fff;
+        }
+    
+        &:hover {
+            background-color: var(--orange);
+        }
     }
 }
+
+
+
 
 .dropdown-menu {
     border-radius: 8px;
-    background-color: #fff;
     border: none;
     .dropdown-item {
         border-radius: 8px;
@@ -58,8 +50,6 @@
     }
     
     .active {
-        background-color: var(--orange);
-
         &:hover {
             background-color: var(--orange);
         }

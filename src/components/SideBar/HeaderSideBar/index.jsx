@@ -1,8 +1,4 @@
-import { useContext } from "react"
-import { OpenSideBarContext } from "../../Context/OpenSideBarContext"
-
 export default function HeaderSideBar() {
-    const { setOpenSideBar } = useContext(OpenSideBarContext)
     return (
         <div
             className="header-box pt-2 pb-4 d-flex justify-content-center"

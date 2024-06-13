@@ -1,0 +1,13 @@
+.wrapper {
+    height: 65px;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 470px) {
+    .wrapper {
+        font-size: 20px;
+    }
+}

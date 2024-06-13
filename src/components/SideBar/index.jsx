@@ -9,20 +9,11 @@ import HeaderSideBar from "./HeaderSideBar/index.jsx"
 import { OpenSideBarContext } from "../Context/OpenSideBarContext.jsx"
 
 export default function SideBar() {
-    const [active, setActive] = useState('active')
-    const [activeTheme, setActiveTheme] = useState('active')
     const { openSideBar } = useContext(OpenSideBarContext)
-
-    const removeActive = () => {
-        setActive('')
-    }
-    const removeActiveTheme = () => {
-        setActiveTheme('')
-    }
 
     return (
         <div className="main-container d-flex">
-            <div style={{ borderRight: "1px solid #BDBEBF", display: openSideBar }} className={`sidebar ${openSideBar ? 'd-none' : 'd-block'} d-xl-block`} id="side_nav">
+            <div style={{ borderRight: "1px solid #BDBEBF", display: openSideBar }} className={`sidebar ${openSideBar ? 'd-none' : 'd-block'} d-xl-block`}>
 
                 <HeaderSideBar />
 
@@ -33,37 +24,34 @@ export default function SideBar() {
                             className="text-decoration-none"
                         >
                             <List
-                                id={1}
-                                className={`${active}
-                            text-decoration-none item px-3 py-2 d-block`}
+                                id='1'
+                                className="text-decoration-none item px-3 py-2 d-block"
                             >
-                                <i class="fa-solid fa-house me-1"></i> DashBoard
+                                <i className="fa-solid fa-house me-1"></i> DashBoard
                             </List>
                         </Link>
 
                         <Link
-                            onClick={removeActive}
-                            to="/stock"
+                            to="/product"
                             className="text-decoration-none"
                         >
                             <List
-                                id={2}
+                                id='2'
                                 className="text-decoration-none item px-3 py-2 d-block"
                             >
-                                <i class="fa-solid fa-barcode me-1"></i> Product
+                                <i className="fa-solid fa-barcode me-1"></i> Product
                             </List>
                         </Link>
 
                         <Link
-                            onClick={removeActive}
-                            to="/"
+                            to="/stocks"
                             className="text-decoration-none"
                         >
                             <List
-                                id={3}
+                                id='3'
                                 className="text-decoration-none item px-3 py-2 d-block"
                             >
-                                <i class="fa-solid fa-layer-group me-1"></i> Stocks
+                                <i className="fa-solid fa-layer-group me-1"></i> Stocks
                             </List>
                         </Link>
                     </ul>
@@ -77,15 +65,15 @@ export default function SideBar() {
                                         id="dropDownTheme" data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        <i class="fa-solid fa-brush me-1"></i> Theme
+                                        <i className="fa-solid fa-brush me-1"></i> Theme
                                     </div>
                                     <ul
-                                        class="dropdown-menu my-0 py-0 dropdown-menu-light w-100"
+                                        className="dropdown-menu my-0 py-0 dropdown-menu-light w-100"
                                         aria-labelledby="dropDownTheme"
                                     >
                                         <ThemeList
                                             id="1"
-                                            className={`${activeTheme} dropdown-item`}
+                                            className="dropdown-item"
                                         >
                                             <div>Light</div>
                                         </ThemeList>
@@ -93,20 +81,21 @@ export default function SideBar() {
                                             id="2"
                                             className="dropdown-item"
                                         >
-                                            <div onClick={removeActiveTheme}>Dark</div>
+                                            <div>Dark</div>
                                         </ThemeList>
                                     </ul>
                                 </div>
                             </ActiveThemeItemProvider>
                         </li>
                         <Link
-                            id={4}
-                            onClick={removeActive}
                             to="/"
                             className="text-decoration-none"
                         >
-                            <List className="text-decoration-none item px-3 py-2 d-block">
-                                <i class="fa-solid fa-gears me-1"></i> Settings
+                            <List
+                                id='4'
+                                className="text-decoration-none item px-3 py-2 d-block"
+                            >
+                                <i className="fa-solid fa-gears me-1"></i> Settings
                             </List>
                         </Link>
                     </ul>

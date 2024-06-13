@@ -5,15 +5,12 @@ export default function List(props) {
     const {activeListItem, setActiveListItem} = useContext(ActiveListItemContext)
     const [active, setActive] = useState('')
 
-    useEffect(() => {
-        if (activeListItem !== props.id) {
-            setActive('')
-        }   
-    }, [activeListItem])
+    useEffect(() => activeListItem !== props.id ? setActive('') : setActive('active'), [activeListItem])
 
     const handleClick = () => {
         setActive('active')
         setActiveListItem(props.id)
+        sessionStorage.setItem('activeList', props.id)
     } 
 
     return (

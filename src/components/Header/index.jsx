@@ -6,17 +6,19 @@ import { OpenSideBarContext } from "../Context/OpenSideBarContext";
 
 export default function Header() {
     const { changeSideBar } = useContext(OpenSideBarContext)
-    
+
     return (
         <header className="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid px-4">
+            <nav className="navbar navbar-expand-lg navbar-light">
+                <div className="container-fluid px-4">
                     <div className="d-flex">
 
-                        <button onClick={() => changeSideBar()} className="btn d-xl-none me-3" style={{ color: "var(--light-green)" }}><i class="fa-solid fa-bars"></i></button>
+                        <button onClick={() => changeSideBar()} className="btn d-xl-none me-3" style={{ color: "var(--light-green)" }}>
+                            <i className="fa-solid fa-bars"></i>
+                        </button>
 
                         <Link to="/" className="text-decoration-none">
-                            <div class="navbar-brand">
+                            <div className="navbar-brand">
                                 <img src={logo} alt="logo" width="40" height="40" className="me-2" />
                                 My Stock
                             </div>
