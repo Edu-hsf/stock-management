@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { ActiveListItemContext } from "../../Context/ActiveListItemContext"
+import { ActiveListItemContext } from "../../../Context/ActiveListItemContext"
 
 export default function List(props) {
     const {activeListItem, setActiveListItem} = useContext(ActiveListItemContext)

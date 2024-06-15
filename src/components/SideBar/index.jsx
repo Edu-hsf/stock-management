@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom"
 import "./styles.scss"
 import List from "./SideBarList/index.jsx"
-import { useContext, useState } from "react"
-import { ActiveListItemProvider } from '../Context/ActiveListItemContext.jsx'
-import { ActiveThemeItemProvider } from "../Context/ActiveThemeItemContext.jsx"
+import { useContext } from "react"
+import { ActiveListItemProvider } from '../../Context/ActiveListItemContext.jsx'
+import { ActiveThemeItemProvider } from "../../Context/ActiveThemeItemContext.jsx"
 import ThemeList from "./ThemeList/index.jsx"
 import HeaderSideBar from "./HeaderSideBar/index.jsx"
-import { OpenSideBarContext } from "../Context/OpenSideBarContext.jsx"
+import { OpenSideBarContext } from "../../Context/OpenSideBarContext.jsx"
 
 export default function SideBar() {
     const { openSideBar } = useContext(OpenSideBarContext)
-
+    
     return (
         <div className="main-container d-flex">
             <div style={{ borderRight: "1px solid #BDBEBF", display: openSideBar }} className={`sidebar ${openSideBar ? 'd-none' : 'd-block'} d-xl-block`}>

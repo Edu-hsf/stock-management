@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png"
 import "./styles.scss"
 import { useContext } from "react";
-import { OpenSideBarContext } from "../Context/OpenSideBarContext";
+import { OpenSideBarContext } from "../../Context/OpenSideBarContext";
 
 export default function Header() {
     const { changeSideBar } = useContext(OpenSideBarContext)
-
+    
     return (
         <header className="wrapper">
             <nav className="navbar navbar-expand-lg navbar-light">

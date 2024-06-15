@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { ActiveThemeItemContext } from "../../Context/ActiveThemeItemContext"
+import { ActiveThemeItemContext } from "../../../Context/ActiveThemeItemContext"
 
 export default function ThemeList(props) {
     const {activeThemeItem, setActiveThemeItem} = useContext(ActiveThemeItemContext)

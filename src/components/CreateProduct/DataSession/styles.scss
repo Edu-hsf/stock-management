@@ -1,0 +1,31 @@
+#dataSession {
+    border-radius: 0px 8px 8px 8px;
+
+    .form-group {
+        width: 100%;
+
+        label {
+            margin-bottom: 2px;
+        }
+
+        .btn {
+            color: var(--orange);
+            border-color: var(--orange);
+
+            &:hover {
+                background-color: var(--orange);
+                color: #fff;
+            }
+        }
+
+        .error-input {
+            border: 1px solid rgb(253, 71, 71);
+        }
+
+        .error-message {
+            color: rgb(253, 71, 71);
+            font-style: italic;
+            font-size: 13px;
+        }
+    }
+}
