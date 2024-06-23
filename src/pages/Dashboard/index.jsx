@@ -91,14 +91,14 @@ export default function DashBoard() {
             <div className="section">
                 <div className='row mb-4'>
                     <div className="box col">
-                        <div className='shadow'>
+                        <div className='shadow-sm'>
                             <h2 className='fw-bold'>ALL STOCKS</h2>
                             <h3>23</h3>
                         </div>
 
                     </div>
                     <div className="box col">
-                        <div className='shadow'>
+                        <div className='shadow-sm'>
                             <h2 className='fw-bold'>ALL ITEMS</h2>
                             <h3>245</h3>
                         </div>
@@ -107,7 +107,7 @@ export default function DashBoard() {
 
                 <div className='row'>
                     <div className="dropdown dropdown-items col-sm w-100">
-                        <button className="btn btn-secondary dropdown-toggle w-100 shadow-sm" type="button" id="dropDownDashBoardItems" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="btn btn-light-green dropdown-toggle w-100" type="button" id="dropDownDashBoardItems" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="fa-brands fa-stack-overflow"></i> Stored items
                         </button>
                         <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardItems">
@@ -130,7 +130,7 @@ export default function DashBoard() {
                     </div>
 
                     <div className="dropdown dropdown-stocks col-sm w-100">
-                        <button className="btn btn-secondary dropdown-toggle w-100 shadow-sm" type="button" id="dropDownDashBoardStocks" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="btn btn-light-green dropdown-toggle w-100 shadow-sm" type="button" id="dropDownDashBoardStocks" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="fa-solid fa-box"></i> Stocks
                         </button>
                         <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardStocks">
@@ -155,14 +155,14 @@ export default function DashBoard() {
 
                 <div className="row">
                     <div className="col mt-4">
-                        <div className="graphic shadow text-center">
+                        <div className="graphic shadow-sm text-center">
                             <div className='pie-chart-3d' id="piechart_3d" style={{ width: '100%', height: '250px', borderRadius: '8px' }}></div>
                             <button className="view-product btn btn-outline  mb-4 shadow-sm">View</button>
                         </div>
                     </div>
 
                     <div className="col mt-4">
-                        <div className='table-items shadow'>
+                        <div className='table-items shadow-sm'>
                             <h3 className='fw-bold'>Latest products added</h3>
                             <table className="table w-100">
                                 <thead>

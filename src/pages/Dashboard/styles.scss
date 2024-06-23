@@ -39,11 +39,12 @@ body {
                 flex-direction: column;
                 background-color: #fff;
                 border-radius: 8px;
-                transition: 350ms;
+                border-color: transparent;
+                transition: border-color 350ms ease-in-out, transform 400ms ease-in-out;
 
                 &:hover {
-                    border: 2px solid silver;
-                    transform: scale(0.99);
+                    border: 2px solid var(--light-green);
+                    transform: scale(0.995);
                 }
             }
 
@@ -51,9 +52,6 @@ body {
 
         .dropdown {
             .btn {
-                background-color: var(--orange);
-                border: none;
-                border-radius: 8px;
                 height: 60px;
                 font-size: 20px;
             }
@@ -108,16 +106,19 @@ body {
             border-radius: 8px;
             overflow: hidden;
             background-color: #fff;
-            transition: 350ms;
+            border-color: transparent;
+            transition: border-color 350ms ease-in-out, transform 400ms ease-in-out;
+
             &:hover {
-                border: 2px solid silver;
-                transform: scale(0.99);
+                border: 2px solid var(--light-green);
+                transform: scale(0.995);
             }
 
             .view-product {
                 border: 1px solid var(--orange);
                 color: var(--orange);
                 width: 200px;
+
                 &:hover {
                     background-color: var(--orange);
                     color: #fff;
@@ -129,14 +130,14 @@ body {
             height: 310px;
             border-radius: 8px;
             background-color: #fff;
-            transition: 350ms;
             overflow: auto;
             padding: 40px;
-
+            border-color: transparent;
+            transition: border-color 350ms ease-in-out, transform 400ms ease-in-out;
 
             &:hover {
-                border: 2px solid silver;
-                transform: scale(0.99);
+                border: 2px solid var(--light-green);
+                transform: scale(0.995);
             }
         }
     }
@@ -181,15 +182,16 @@ body {
     #dashboard {
         .section {
             .box {
-                
+
                 div {
                     height: 180px;
+
                     h2 {
                         font-size: 17px;
                     }
 
                     h3 {
-                       font-size: 17px; 
+                        font-size: 17px;
                     }
                 }
             }
@@ -213,7 +215,7 @@ body {
             .table-items {
                 padding: 5px;
                 padding-top: 10px;
-                
+
             }
         }
     }
