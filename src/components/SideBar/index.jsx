@@ -39,7 +39,7 @@ export default function SideBar() {
                                 id='2'
                                 className="text-decoration-none item px-3 py-2 d-block"
                             >
-                                <i className="fa-solid fa-barcode me-1"></i> Product
+                                <i className="fa-solid fa-cart-shopping"></i> Product
                             </List>
                         </Link>
 

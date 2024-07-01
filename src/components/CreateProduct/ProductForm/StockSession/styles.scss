@@ -1,0 +1,12 @@
+#stockSession {
+    border-radius: 8px 8px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    .form-group {
+        label {
+            margin-bottom: 2px;
+        }
+    }
+}

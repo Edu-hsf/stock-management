@@ -6,13 +6,12 @@ import { OpenSideBarContext } from "../../Context/OpenSideBarContext";
 
 export default function Header() {
     const { changeSideBar } = useContext(OpenSideBarContext)
-    
+
     return (
         <header className="wrapper">
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container-fluid px-4">
                     <div className="d-flex">
-
                         <button onClick={() => changeSideBar()} className="btn d-xl-none me-3" style={{ color: "var(--light-green)" }}>
                             <i className="fa-solid fa-bars"></i>
                         </button>
@@ -23,9 +22,6 @@ export default function Header() {
                                 My Stock
                             </div>
                         </Link>
-                    </div>
-                    <div className="login">
-                        <button className="btn btn-light-green btn-login">Login</button>
                     </div>
                 </div>
             </nav>

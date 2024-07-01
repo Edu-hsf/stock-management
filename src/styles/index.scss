@@ -29,3 +29,17 @@
         color: #fff;
     }
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.error-input {
+    border: 1px solid rgb(253, 71, 71);
+}
+
+.error-message {
+    color: rgb(253, 71, 71);
+    font-style: italic;
+    font-size: 13px;
+}
