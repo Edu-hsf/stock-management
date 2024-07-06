@@ -3,6 +3,8 @@ import logo from "../../assets/logo.png"
 import "./styles.scss"
 import { useContext } from "react";
 import { OpenSideBarContext } from "../../Context/OpenSideBarContext";
+import { auth, logout } from "../../firebaseConfig";
+import { signOut } from "firebase/auth";
 
 export default function Header() {
     const { changeSideBar } = useContext(OpenSideBarContext)
@@ -22,6 +24,8 @@ export default function Header() {
                                 My Stock
                             </div>
                         </Link>
+
+                        <button onClick={() => signOut(auth)}>Signout</button>
                     </div>
                 </div>
             </nav>

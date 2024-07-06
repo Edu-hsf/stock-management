@@ -16,11 +16,9 @@ export default function Login() {
                 <div className='d-flex justify-content-center align-items-center'>
                     <SignIn setMove_x={setMove_x} setMove_y={setMove_y} />
                 </div>
-
                 <div className='d-flex justify-content-center align-items-center'>
                     <SignUp setMove_x={setMove_x} setMove_y={setMove_y} />
                 </div>
-
                 <StyledBanner move_x={move_x} move_y={move_y}>
                     <img src={banner} alt="login-banner" />
                 </StyledBanner>

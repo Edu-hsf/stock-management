@@ -6,7 +6,7 @@ import { useContext, useState } from 'react'
 import { SelectedValueProvider } from '../CreateProductContexts/SelectedValueContext'
 import { FormContext } from '../CreateProductContexts/FormContext'
 import { ShowSessionContext } from '../CreateProductContexts/ShowSessionContext'
-import { productsReferences } from '../../../services/dataAcess/productsAcess'
+import { productsReferences } from '../../../services/dataAccess/productsAccess'
 import AlertDanger from '../../Alert/AlertDanger'
 import AlertSuccess from '../../Alert/AlertSuccess'
 

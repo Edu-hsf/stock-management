@@ -1,32 +1,26 @@
 import { useForm } from "react-hook-form"
 import googleIcon from '../../../../assets/google-icon.svg'
 import './styles.scss'
-import { usersReferences } from "../../../../services/dataAcess/usersAcess"
 import { signUpSchema } from "./signUpSchema"
 import { useState } from "react"
 import { signInWithGoogle, signUpAuth } from "../../../../firebaseConfig"
+import { addUsersAction } from "../../../../services/actions/usersAction"
 
 export default function SignUp({ setMove_x, setMove_y }) {
     const { register, handleSubmit, formState: { errors } } = useForm(signUpSchema)
     const [viewPassword, setViewPassword] = useState(false)
 
-    const registerUser = async (data) => {
-        signUpAuth(data.email, data.password)
-        const user = new usersReferences()
-        delete data.confirmPassword
-        await user.register(data)
-        
+    const registerUser = (data) => {
+        signUpAuth(data.email, data.password, data.name)
+        addUsersAction({ 
+            name: data.name, 
+            email: data.email, 
+            password: data.password 
+        })
     }
 
     const registerWithGoogle = async () => {
-        const { displayName, email } = await signInWithGoogle()
-        const user = new usersReferences()
-        if (!user.get(email)) {
-            await user.register({ displayName, email, loggedWithGoogle: true })
-            window.location = "/"
-        } else {
-            window.location = "/"
-        }
+        await signInWithGoogle()
     }
 
     return (

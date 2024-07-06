@@ -1,14 +1,12 @@
 import { z } from "zod";
-import { usersReferences } from "../../../../services/dataAcess/usersAcess";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const user = new usersReferences()
+import { getUsersAction } from "../../../../services/actions/usersAction";
 
 const schema = z.object({
     emailLogin: z.string().min(1, 'Email is required.').email('Enter a valid email.'),
     passwordLogin: z.string().min(1, 'Password is required.'),
-}).refine(async val => {
-    const login = await user.authenticate(val.emailLogin, val.passwordLogin)
+}).refine(val => {
+    const login = getUsersAction('email', '==', val).then()
     return login
 }, { message: 'Incorrect email or password.', path: ['unauthenticated'] })
 

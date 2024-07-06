@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form'
 import googleIcon from '../../../../assets/google-icon.svg'
 import './styles.scss'
-import { usersReferences } from '../../../../services/dataAcess/usersAcess'
 import { useState } from 'react'
 import { signInSchema } from './signInSchema'
-import { signInAuth } from '../../../../firebaseConfig'
+import { signInAuth, signInWithGoogle } from '../../../../firebaseConfig'
+import { getUsersAction } from '../../../../services/actions/usersAction'
 
 
 export default function SignIn({ setMove_x, setMove_y }) {
@@ -15,12 +15,15 @@ export default function SignIn({ setMove_x, setMove_y }) {
         signInAuth(data.emailLogin, data.passwordLogin)
     }
 
-    const registerWithGoogle = async () => {
-        const { displayName, email } = await signInWithGoogle()
-        const user = new usersReferences()
-        if (!user.get(email)) {
-            await user.register({ displayName, email, loggedWithGoogle: true })
-        } else {
+    const loginWithGoogle = () => {
+        const token = signInWithGoogle().then()
+        const account = getUsersAction('token', '==', token)
+        if (!account) {
+            addUsersAction({ 
+                name: account.displayName, 
+                email: account.email,
+
+            }).then() 
         }
     }
 
@@ -86,7 +89,7 @@ export default function SignIn({ setMove_x, setMove_y }) {
                 <hr className="flex-grow-1" />
             </div>
 
-            <button type='submit' className="btn btn-light-green mt-3" onClick={registerWithGoogle}>
+            <button type='submit' className="btn btn-light-green mt-3" onClick={loginWithGoogle}>
                 <img src={googleIcon} alt="google-icon" className="ms-2 me-2 google-icon" width={25} height={25} />
                 Sign-in with Google
             </button>

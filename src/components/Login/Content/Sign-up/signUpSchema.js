@@ -1,16 +1,14 @@
 import { z } from "zod";
-import { usersReferences } from "../../../../services/dataAcess/usersAcess";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const user = new usersReferences()
+import { getUsersAction } from "../../../../services/actions/usersAction";
 
 const schema = z.object({
     name: z.string().min(1, 'Name is required.'),
     email: z.string()
     .min(1, 'Email is required.')
     .email('Enter a valid email.')
-    .refine(async val => {
-        const userExists = await user.get(val)
+    .refine(val => {
+        const userExists = getUsersAction('email', '==', val).then()
         return !userExists
     }, { message: 'User has already been registered.' }),
     password: z.string()

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -28,7 +28,7 @@ export const signInWithGoogle = async () => {
   await signInWithPopup(auth, provider)
     .then(result => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      user = result.user;
+      user = credential;
 
     }).catch((error) => {
       const errorCode = error.code;
@@ -39,10 +39,13 @@ export const signInWithGoogle = async () => {
   return user
 }
 
-export const signUpAuth = (email, password) => {
+export const signUpAuth = (email, password, name) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      updateProfile(user, {
+        displayName: name
+      })
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -54,9 +57,16 @@ export const signInAuth = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
 }
+
+export const logout = signOut(auth).then(() => {
+  return res
+}).catch((error) => {
+
+});
