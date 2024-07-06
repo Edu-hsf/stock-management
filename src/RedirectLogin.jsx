@@ -3,6 +3,6 @@ import { useContext } from "react";
 import { AuthContext } from "./Context/AuthContext";
 
 export function RedirectLogin({children}) {
-    const { userLoggedIn } = useContext(AuthContext)
-    return userLoggedIn ? children : <Navigate to="/login" />
+    const { token } = useContext(AuthContext)
+    return token ? children : <Navigate to="/login" />
 }

@@ -6,7 +6,10 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
-    const [userLoggedIn, setUserLoggedIn] = useState(false)
+    const [token, setToken] = useState(() => {
+        const storageToken = sessionStorage.getItem('token')
+        return storageToken ? storageToken : null
+    })
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -16,19 +19,19 @@ export const AuthProvider = ({ children }) => {
 
     async function initializeUser (user) {
         if (user) {
-            console.log('logado')
+            sessionStorage.setItem('token', user.accessToken)
             setCurrentUser({...user})
-            setUserLoggedIn(true)
+            setToken(user.accessToken)
         } else {
-            console.log('não logado')
+            sessionStorage.removeItem('token')
             setCurrentUser(null)
-            setUserLoggedIn(false)
+            setToken(null)
         }
         setLoading(false)
     }
    
     return (
-        <AuthContext.Provider value={{ currentUser, userLoggedIn, loading }}>
+        <AuthContext.Provider value={{ currentUser, token, loading }}>
             {children}
         </AuthContext.Provider>
     );

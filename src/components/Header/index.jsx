@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png"
 import "./styles.scss"
 import { useContext } from "react";
 import { OpenSideBarContext } from "../../Context/OpenSideBarContext";
-import { auth, logout } from "../../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
 
 export default function Header() {
@@ -28,7 +28,7 @@ export default function Header() {
                         <button onClick={() => signOut(auth)}>Signout</button>
                     </div>
                 </div>
-            </nav>
+            </nav> 
         </header>
     )
 }

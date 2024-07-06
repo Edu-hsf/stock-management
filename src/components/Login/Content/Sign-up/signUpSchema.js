@@ -7,8 +7,8 @@ const schema = z.object({
     email: z.string()
     .min(1, 'Email is required.')
     .email('Enter a valid email.')
-    .refine(val => {
-        const userExists = getUsersAction('email', '==', val).then()
+    .refine(async val => {
+        const userExists = await getUsersAction('email', '==', val)
         return !userExists
     }, { message: 'User has already been registered.' }),
     password: z.string()
