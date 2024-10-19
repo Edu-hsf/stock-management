@@ -118,30 +118,6 @@ body {
             }
         }
 
-        .graphic {
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #fff;
-            border-color: transparent;
-            transition: border-color 350ms ease-in-out, transform 400ms ease-in-out;
-
-            &:hover {
-                border: 1px solid var(--light-green);
-                transform: scale(0.995);
-            }
-
-            .view-product {
-                border: 1px solid var(--orange);
-                color: var(--orange);
-                width: 200px;
-
-                &:hover {
-                    background-color: var(--orange);
-                    color: #fff;
-                }
-            }
-        }
-
         .table-items {
             height: 310px;
             border-radius: 8px;
