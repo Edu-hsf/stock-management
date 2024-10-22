@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserCredential } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserCredential, signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -14,7 +14,7 @@ const firebaseConfig = {
   measurementId: "G-5ZVSX37KT4"
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const userAuth = auth.currentUser;
 auth.languageCode = 'en';
@@ -22,43 +22,3 @@ auth.languageCode = 'en';
 export const provider = new GoogleAuthProvider();
 
 export const db = getFirestore(app);
-
-export const signInWithGoogle = async (): Promise<UserCredential> => {
-  return await signInWithPopup(auth, provider)
-    .then(result => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      return credential;
-
-    }).catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      return errorMessage
-
-    });
-}
-
-export const signUpAuth = (email: string, password: string, name: string) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      updateProfile(user, {
-        displayName: name
-      })
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-}
-
-export const signInAuth = (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-}

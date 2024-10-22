@@ -3,8 +3,8 @@ import googleIcon from '../../../../assets/google-icon.svg'
 import './styles.scss'
 import { useState } from 'react'
 import { signInSchema } from './signInSchema'
-import { signInAuth, signInWithGoogle } from '../../../../services/firebaseConfig'
 import { MoveType } from '../../../../pages/Login'
+import { signInAction, signInWithGoogleAction } from '../../../../services/actions/signAction'
 
 interface SignInType {
     emailLogin: string
@@ -19,12 +19,12 @@ export default function SignIn({ setMove_x, setMove_y }: MoveType) {
 
     const loginUser: SubmitHandler<SignInType> = (data) => {
         if (data) {
-            signInAuth(data.emailLogin, data.passwordLogin)
+            signInAction(data.emailLogin, data.passwordLogin)
         }
     }
 
     const loginWithGoogle = async () => {
-        await signInWithGoogle()
+        await signInWithGoogleAction()
     }
 
     return (

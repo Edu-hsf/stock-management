@@ -3,9 +3,9 @@ import googleIcon from '../../../../assets/google-icon.svg'
 import './styles.scss'
 import { signUpSchema } from "./signUpSchema"
 import { useState } from "react"
-import { signInWithGoogle, signUpAuth } from "../../../../services/firebaseConfig"
 import { addUsersAction } from "../../../../services/actions/usersAction"
 import { MoveType } from "../../../../pages/Login"
+import { signInWithGoogleAction, signUpAction } from "../../../../services/actions/signAction"
 
 interface SignUpType {
     name: string
@@ -26,15 +26,15 @@ export default function SignUp({ setMove_x, setMove_y }: MoveType) {
                 email: data.email, 
                 password: data.password,
                 isAuthWithGoogle: false,
-                
+                avatar: 'default'
             }
             addUsersAction(newUser)
-            signUpAuth(data.email, data.password, data.name)
+            signUpAction(data.email, data.password, data.name)
         }
     }
 
     const registerWithGoogle = async () => {
-        await signInWithGoogle()
+        await signInWithGoogleAction()
     }
 
     return (

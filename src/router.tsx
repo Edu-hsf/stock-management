@@ -4,7 +4,7 @@ import Stocks from "./pages/main/Stocks";
 import DashBoard from "./pages/main/Dashboard";
 import Product from "./pages/main/Product";
 import Login from "./pages/Login";
-import { RedirectHome, RedirectLogin } from "./AuthRedirect.tsx";
+import { RedirectHome, RedirectLogin } from "./components/AuthRedirect";
 import { AuthProvider } from "./Context/AuthContext.tsx";
 
 export const AppRoutes = () => {
