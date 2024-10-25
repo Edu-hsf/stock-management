@@ -6,7 +6,8 @@ import { ComponentProps, } from '../interfaces';
 export interface AuthContextType {
     userSession: {
         user: User | null
-    }
+    },
+    loading: boolean
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }: ComponentProps) => {
     const [userSession, setUserSession] = useState<{ user: User | null }>({
         user: null
     })
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -24,13 +26,15 @@ export const AuthProvider = ({ children }: ComponentProps) => {
     async function initializeUser (user: User | null) {
         if (user) {
             setUserSession({ user })
+            setLoading(false)
         } else {
             setUserSession({ user: null })
+            setLoading(false)
         }
     }
 
     return (
-        <AuthContext.Provider value={{ userSession }}>
+        <AuthContext.Provider value={{ userSession, loading }}>
             {children}
         </AuthContext.Provider>
     );

@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 import Title from '../../../components/Title';
 import PieChart from '../../../components/PieChart';
+import { useContext } from 'react';
+import { AuthContext } from '../../../Context/AuthContext';
 
-export default function DashBoard() {    
+export default function DashBoard() {
+    const {userSession} = useContext(AuthContext)!
+    const userName = userSession.user?.displayName ? userSession.user.displayName[0].toUpperCase() + userSession.user.displayName.substring(1) : ''
     const stocks = [
         {
             id: 1,
@@ -68,7 +72,7 @@ export default function DashBoard() {
                 </button>
             </div>
 
-            <Title>Hello, Eduardo Fernandes</Title>
+            <Title>Hello, {userName}!</Title>
 
             <div className="section">
                 <div className='row mb-4'>

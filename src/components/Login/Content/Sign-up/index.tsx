@@ -3,7 +3,7 @@ import googleIcon from '../../../../assets/google-icon.svg'
 import './styles.scss'
 import { signUpSchema } from "./signUpSchema"
 import { useState } from "react"
-import { addUsersAction } from "../../../../services/actions/usersAction"
+import { addUsersAction, getUsersAction } from "../../../../services/actions/usersAction"
 import { MoveType } from "../../../../pages/Login"
 import { signInWithGoogleAction, signUpAction } from "../../../../services/actions/signAction"
 
@@ -22,7 +22,7 @@ export default function SignUp({ setMove_x, setMove_y }: MoveType) {
     const registerUser: SubmitHandler<SignUpType> = (data) => {
         if (data) {
             const newUser = { 
-                name: data.name, 
+                name: data.name.toLowerCase(), 
                 email: data.email, 
                 password: data.password,
                 isAuthWithGoogle: false,
