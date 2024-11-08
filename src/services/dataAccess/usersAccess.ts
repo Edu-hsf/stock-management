@@ -20,7 +20,9 @@ export const getUsersAccess = async (field: string, opStr: WhereFilterOp, value:
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot?.docs[0]?.data()) {
-        return querySnapshot.docs[0].data()
+        const data = querySnapshot.docs[0].data()
+        const id = querySnapshot.docs[0].id
+        return {id, data}
     } else {
         return null
     }

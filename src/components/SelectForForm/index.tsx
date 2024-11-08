@@ -53,8 +53,11 @@ export default function SelectForForm<T extends FieldValues>({ id, registrationN
                     id={id ? id : ''}
                     styles={selectStyles(error)}
                     options={options}
-                    value={options.find(s => s === selectedOption)}
-                    onChange={(currentValue) => handleChange(currentValue as SingleValue<OptionsType>)}
+                    value={options.find(s => s.value === selectedOption?.value)}
+                    onChange={(currentValue) => {
+                        handleChange(currentValue as SingleValue<OptionsType>)
+                        return onChange((currentValue as OptionsType).label);
+                    }}
                 ></Select>
             )}
         />

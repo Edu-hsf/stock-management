@@ -32,7 +32,7 @@ export default function StockSession({ className }: ComponentProps) {
             </FormGroup.Root>
 
             <FormGroup.Root>
-                <FormGroup.Label text='Quantity actual' forId='quantity' isImportant />
+                <FormGroup.Label text='Quantity actual' forId='quantity'  />
                 <FormGroup.Input
                     type="number"
                     className={`form-control ${errors.quantity && "error-input"}`}

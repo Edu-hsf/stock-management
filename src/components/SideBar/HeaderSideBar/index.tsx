@@ -13,9 +13,10 @@ export default function HeaderSideBar() {
     useEffect(() => {
         const checkUserAvatar = async () => {
             if (userSession.user?.email) {
-                const userData = await getUsersAction('email', '==', userSession.user.email);
-                setDataUser(userData);
-                setIsDefaultAvatar(userData?.avatar === 'default');
+                const user = await getUsersAction('email', '==', userSession.user.email);
+                if (user) {
+                    setIsDefaultAvatar(user.data.avatar === 'default');
+                }
             }
         }
 

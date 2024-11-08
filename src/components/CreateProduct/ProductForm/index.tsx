@@ -11,9 +11,10 @@ import AlertDanger from '../../Alert/AlertDanger'
 import AlertSuccess from '../../Alert/AlertSuccess'
 
 export default function ProductForm() {
-    const { handleSubmit } = useContext(ProductFormContext)!
+    const { handleSubmit, errors } = useContext(ProductFormContext)!
     const { showSession } = useContext(ShowSessionContext)!
     const [alert, setAlert] = useState('')
+    console.log(errors)
 
     const onSubmit = handleSubmit ((data) => {
         getProductsAction('productCode', '==', data.productCode).then(res => {
@@ -24,11 +25,6 @@ export default function ProductForm() {
                 setAlert('success')
             }
         })
-        try {
-            
-        } catch (err) {
-            
-        }
     })
 
     return (

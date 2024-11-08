@@ -15,13 +15,17 @@ export default function DataSession({ className }: ComponentProps) {
         randomCode,
         setRandomCode,
         isReal,
-        setIsReal
+        setIsReal,
+        selectedStorage,
+        setSelectedStorage,
+        priceValue,
+        setPriceValue
     } = useContext(SelectedValueContext)!
 
     const handleGenerateCode = () => {
         const newCode = '#' + Math.floor(Math.random() * 1000000000).toString().padStart(9, '0')
         setRandomCode(newCode)
-        setValue('productCode', newCode)
+        setValue('productCode', newCode, { shouldValidate: true })
     }
 
     return (
@@ -46,14 +50,14 @@ export default function DataSession({ className }: ComponentProps) {
                     <FormGroup.Input
                         readOnly
                         type="text"
-                        className={`${errors.productCode && randomCode.length <= 0 && "error-input"}`}
+                        className={`${errors.productCode && "error-input"}`}
                         placeholder="#3907685..."
-                        value={randomCode}
+                        defaultValue={randomCode}
                         {...register('productCode')}
                     />
                     <button className="btn btn-orange" type="button" onClick={handleGenerateCode}>Generate</button>
                 </FormGroup.InputGroup>
-                <FormGroup.ErrorMessage text={errors.productCode && errors.productCode.message} />
+                <FormGroup.ErrorMessage text={errors.productCode?.message} />
             </FormGroup.Root>
 
             <FormGroup.Root>
@@ -70,7 +74,7 @@ export default function DataSession({ className }: ComponentProps) {
             </FormGroup.Root>
 
             <FormGroup.Root>
-                <FormGroup.Label text='Price' forId='price' />
+                <FormGroup.Label text='Price' forId='price' isImportant />
                 <FormGroup.InputGroup>
                     <SelectForForm
                         control={control}
@@ -85,22 +89,26 @@ export default function DataSession({ className }: ComponentProps) {
                         name="price"
                         render={({ field: { onChange } }) => (
                             <NumericFormat
-                                id='price'
                                 className='form-control'
                                 decimalScale={2}
                                 fixedDecimalScale
                                 decimalSeparator={isReal ? ',' : '.'}
                                 thousandSeparator={isReal ? '.' : ','}
-                                onChange={onChange}
                                 placeholder={isReal ? '99,99' : '99.99'}
+                                onChangeCapture={val => setPriceValue(val.target.value)}
+                                defaultValue={priceValue ? priceValue?.replace(',', '.') : null}
+                                onValueChange={(values) => {
+                                    onChange(values.floatValue); // Passa o valor numérico puro
+                                }}
                             />
                         )}
                     />
                 </FormGroup.InputGroup>
+                <FormGroup.ErrorMessage text={errors.price && errors.price.message} />
             </FormGroup.Root>
 
             <FormGroup.Root>
-                <FormGroup.Label text='Length' forId='length' isImportant />
+                <FormGroup.Label text='Length' forId='length' />
                 <FormGroup.InputGroup>
                     <SelectForForm
                         id='lengthOptions'
@@ -117,18 +125,21 @@ export default function DataSession({ className }: ComponentProps) {
                         {...register('length')}
                     />
                 </FormGroup.InputGroup>
+                <FormGroup.ErrorMessage text={errors.length?.message} />
             </FormGroup.Root>
 
             <FormGroup.Root>
                 <FormGroup.Label text='Storage' isImportant />
                 <FormGroup.InputGroup>
                     <SelectForForm
+                        defaultValue={selectedStorage}
                         control={control}
                         registrationName='storage'
                         setValue={setValue}
                         options={stocksOptions}
                         placeholder='Choose...'
                         error={errors.storage && true}
+                        onChange={val => setSelectedStorage(val)}
                     />
                 </FormGroup.InputGroup>
                 <FormGroup.ErrorMessage text={errors.storage && errors.storage.message} />

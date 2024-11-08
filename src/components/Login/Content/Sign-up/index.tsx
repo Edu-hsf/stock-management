@@ -3,7 +3,7 @@ import googleIcon from '../../../../assets/google-icon.svg'
 import './styles.scss'
 import { signUpSchema } from "./signUpSchema"
 import { useState } from "react"
-import { addUsersAction, getUsersAction } from "../../../../services/actions/usersAction"
+import { addUsersAction } from "../../../../services/actions/usersAction"
 import { MoveType } from "../../../../pages/Login"
 import { signInWithGoogleAction, signUpAction } from "../../../../services/actions/signAction"
 
@@ -19,7 +19,7 @@ export default function SignUp({ setMove_x, setMove_y }: MoveType) {
     const { register, handleSubmit, formState: { errors } } = useForm<SignUpType>(signUpSchema)
     const [viewPassword, setViewPassword] = useState(false) 
 
-    const registerUser: SubmitHandler<SignUpType> = (data) => {
+    const registerUser: SubmitHandler<SignUpType> = async (data) => {
         if (data) {
             const newUser = { 
                 name: data.name.toLowerCase(), 
@@ -28,7 +28,7 @@ export default function SignUp({ setMove_x, setMove_y }: MoveType) {
                 isAuthWithGoogle: false,
                 avatar: 'default'
             }
-            addUsersAction(newUser)
+            await addUsersAction(newUser)
             signUpAction(data.email, data.password, data.name)
         }
     }

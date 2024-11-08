@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { ComponentProps } from '../../interfaces'
 
 export interface AlertType extends ComponentProps{
-    direction: string
+    direction: 'down' | 'up'
 }
 
 export const StyledAlertDanger = styled.div<AlertType>`

@@ -1,6 +1,6 @@
 import { FieldErrors } from "react-hook-form"
 import { ProductType } from "../../../../interfaces"
-import { CSSObjectWithLabel, StylesConfig } from "react-select"
+import { StylesConfig } from "react-select"
 
 export const currencyOptions = [
     { value: 'dollar', label: 'dollar' },

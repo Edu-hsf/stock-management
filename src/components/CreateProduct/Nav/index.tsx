@@ -17,7 +17,7 @@ export default function Nav() {
                         setShowSession={setShowSession}
                         id={1}
                     >
-                        {errors.name || errors.productCode || errors.category || errors.storage ? (
+                        {errors.name || errors.price || errors.category || errors.storage || errors.productCode || errors.length ? (
                             <>
                                 Data
                                 <span className='text-danger ms-1'>!</span>
@@ -41,7 +41,16 @@ export default function Nav() {
                         )}
                     </NavItem>
                     <NavItem setShowSession={setShowSession} id={3}>
-                        Details
+                        {errors.description ? (
+                            <>
+                                Details
+                                <span className='text-danger ms-1'>!</span>
+                            </>
+                        ) : (
+                            <>
+                                Details
+                            </>
+                        )}
                     </NavItem>
                 </ActiveNavProvider>
             </ul>
