@@ -10,12 +10,6 @@ export const currencyOptions = [
     { value: 'iene', label: 'iene' }
 ]
 
-export const lengthOptions = [
-    { value: 'metre', label: 'metre' },
-    { value: 'centimeter', label: 'centimeter' },
-    { value: 'millimeter', label: 'millimeter' }
-]
-
 export const stocksOptions = [
     {   
         value: 'ok',

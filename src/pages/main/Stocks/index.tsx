@@ -2,22 +2,44 @@ import "./styles.scss"
 import Title from "../../../components/Title"
 import StockTables from "../../../components/StockTables"
 import { Link } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { DocumentData } from "firebase/firestore"
-import { getAllStocksAction } from "../../../services/actions/stocksAction"
+import { useContext, useEffect, useState } from "react"
+import { StockListContext } from "../../../Context/StockListContext"
+import { getProductsAction } from "../../../services/actions/productsAction"
+
+interface dataType {
+    name: string,
+    quantity: number,
+    code: string,
+    category: string,
+    price: number
+}
 
 export default function Stocks() {
-    const [stocks, setStocks] = useState<DocumentData[]>([])
+    const { stocks } = useContext(StockListContext)!
+    const [productsArray, setProductsArray] = useState<dataType[][]>([]);
 
     useEffect(() => {
-        const fetchStocks = async () => {
-            setStocks(await getAllStocksAction())
-        }
-        fetchStocks()
-    }, [])
-    
+        const fetchProducts = async () => {
+            const productsDataArray: dataType[][] = await Promise.all(
+                stocks.map(async (stock) => {
+                    const products = await getProductsAction('stockID', '==', stock.id);
+                    return products.map((product) => ({
+                        name: product.data.name,
+                        quantity: product.data.quantity,
+                        code: product.data.code,
+                        category: product.data.category,
+                        price: product.data.price,
+                    }));
+                })
+            );
+            setProductsArray(productsDataArray);
+        };
+
+        fetchProducts();
+    }, [stocks]);
+
     return (
-        <div id="stocks" className="container-fluid ">
+        <div id="stocks" className="container-fluid px-4 pt-2">
             <Title className='d-flex justify-content-between'>
                 Your stocks
                 <Link to='/stocks/createstock'>
@@ -27,8 +49,12 @@ export default function Stocks() {
                 </Link>
             </Title>
             <div className="container-fluid">
-                {stocks.map((stock) => (
-                    <StockTables stockName={stock.name} tableProducts={[{name: 'Nike', quantity: 23, code: '#13451490', category: 'Esportivo', price: 1344.99}, {name: 'Addidas', quantity: 15, code: '#09185743', category: 'Esportivo', price: 1458.99}]}/>
+                {stocks.map((stock, i) => (
+                    <StockTables
+                        key={i}
+                        stockName={stock.data.name}
+                        tableProducts={productsArray[i] ?? []}
+                    />
                 ))}
             </div>
         </div>

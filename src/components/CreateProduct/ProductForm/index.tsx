@@ -11,20 +11,21 @@ import AlertDanger from '../../Alert/AlertDanger'
 import AlertSuccess from '../../Alert/AlertSuccess'
 
 export default function ProductForm() {
-    const { handleSubmit, errors } = useContext(ProductFormContext)!
+    const { handleSubmit } = useContext(ProductFormContext)!
     const { showSession } = useContext(ShowSessionContext)!
     const [alert, setAlert] = useState('')
-    console.log(errors)
 
-    const onSubmit = handleSubmit ((data) => {
-        getProductsAction('productCode', '==', data.productCode).then(res => {
-            if (res) {
-                setAlert('failed')
-            } else {
-                addProductsAction(data)
-                setAlert('success')
-            }
-        })
+    const onSubmit = handleSubmit (async (data) => {
+        const thisCodeExists = await getProductsAction('productCode', '==', data.code)
+        if (thisCodeExists.length) {
+            setAlert('failed')
+        } else {
+            addProductsAction({...data, createdAt: new Date()})
+            setAlert('success')
+            setTimeout(() => {
+                window.location.reload()
+            }, 3400);
+        }
     })
 
     return (

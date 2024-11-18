@@ -1,6 +1,11 @@
 import { setDoc, doc, collection, addDoc, WhereFilterOp, where, query, getDocs, updateDoc, DocumentData } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
+type docsType = {
+    id: string,
+    data: DocumentData
+}
+
 export const addStocksAccess = async (data: object) => {
     const ref = collection(db, 'stocks')
     const response = await addDoc(ref, data)
@@ -19,13 +24,11 @@ export const getStocksAccess = async (field: string, opStr: WhereFilterOp, value
 
     const querySnapshot = await getDocs(q);
 
-    if (querySnapshot?.docs[0]?.data()) {
-        const data = querySnapshot.docs[0].data()
-        const id = querySnapshot.docs[0].id
-        return {id, data}
-    } else {
-        return null
-    }
+    let docs: Array<docsType> = []
+    querySnapshot.forEach((doc) => {
+        docs.push({ id: doc.id, data: doc.data() })
+    })
+    return docs
 }
 
 export const updateStocksAccess = async (documentId: string, data: object) => {
@@ -38,9 +41,9 @@ export const getAllStocksAccess = async () => {
     const ref = collection(db, 'stocks')
 
     const querySnapshot = await getDocs(ref);
-    let docs: Array<DocumentData> = []
+    let docs: Array<docsType> = []
     querySnapshot.forEach((doc) => {
-        docs.push(doc.data())
+        docs.push({ id: doc.id, data: doc.data() })
     })
     return docs
 }

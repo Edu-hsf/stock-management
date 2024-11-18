@@ -6,8 +6,10 @@ import Product from "./pages/main/Product";
 import Login from "./pages/Login";
 import { RedirectHome, RedirectLogin } from "./components/AuthRedirect";
 import { AuthProvider } from "./Context/AuthContext.tsx";
-import { Children } from "react";
 import CreateStock from "./pages/main/Stocks/CreateStock/index.tsx";
+import { StockListProvider } from "./Context/StockListContext.tsx";
+import { ProductListProvider } from "./Context/ProductListContext.tsx";
+import Settings from "./pages/main/SettingsPage/index..tsx";
 
 export const AppRoutes = () => {
     return (
@@ -16,14 +18,19 @@ export const AppRoutes = () => {
                 <Route path="/" element={
                     <AuthProvider>
                         <RedirectLogin>
-                            <RootLayout />
+                            <StockListProvider>
+                                <ProductListProvider>
+                                    <RootLayout />
+                                </ProductListProvider>
+                            </StockListProvider>
                         </RedirectLogin>
                     </AuthProvider>
                 }>
                     <Route index={true} element={<DashBoard />} />
                     <Route path="/createproduct" element={<Product />} />
-                    <Route path="/stocks" element={<Stocks />}/>
-                    <Route path="/stocks/createstock" element={<CreateStock />}/>
+                    <Route path="/stocks" element={<Stocks />} />
+                    <Route path="/stocks/createstock" element={<CreateStock />} />
+                    <Route path="/settings" element={<Settings />} />
                 </Route>
 
                 <Route path="/login" element={

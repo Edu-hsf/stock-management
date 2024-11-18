@@ -8,7 +8,6 @@ import { useContext, useState } from 'react'
 import AlertDanger from '../../../../components/Alert/AlertDanger'
 import AlertSuccess from '../../../../components/Alert/AlertSuccess'
 import { addStocksAction } from '../../../../services/actions/stocksAction'
-import { Navigate } from 'react-router-dom'
 
 interface StockType {
     name: string,
@@ -19,21 +18,17 @@ export default function CreateStock() {
     const { register, setValue, formState: { errors }, handleSubmit } = useForm<StockType>(stockSchema)
     const { userSession } = useContext(AuthContext)!
     const [alert, setAlert] = useState('')
-    const [loading, setLoading] = useState(true)
 
-    const dataStock: SubmitHandler<StockType> = (stockData) => {
-        if (stockData) {
-            const data = {
-                name: stockData.name,
-                code: stockData.code,
-                userUID: userSession.user?.uid
-            }
-            addStocksAction(data)
-            setAlert('success')
-            setTimeout(() => {
-                setLoading(false)
-            }, 3800);
-        }
+    const dataStock: SubmitHandler<StockType> = (data) => {
+        addStocksAction({ 
+            ...data, 
+            userUID: userSession.user?.uid, 
+            createdAt: new Date() 
+        })
+        setAlert('success')
+        setTimeout(() => {
+            window.location.href = '/stocks'
+        }, 3400);
     }
 
     const handleGenerateCode = () => {
@@ -41,7 +36,7 @@ export default function CreateStock() {
         setValue('code', newCode, { shouldValidate: true })
     }
 
-    return loading ? (
+    return (
         <div className="container-fluid" id='container-form'>
             <Title>Create Stock</Title>
             <div className='container-fluid shadow-sm'>
@@ -79,5 +74,5 @@ export default function CreateStock() {
                 </div>
             </div>
         </div>
-    ) : <Navigate to="/stocks" />
+    )
 }

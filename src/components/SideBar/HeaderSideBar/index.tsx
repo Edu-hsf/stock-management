@@ -1,41 +1,36 @@
+import "./styles.scss"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../../Context/AuthContext"
 import userDefault from "../../../assets/user-default.png"
 import { getUsersAction } from "../../../services/actions/usersAction"
-import "./styles.scss"
 import { DocumentData } from "firebase/firestore"
 
 export default function HeaderSideBar() {
     const { userSession } = useContext(AuthContext)!
-    const [isDefaultAvatar, setIsDefaultAvatar] = useState(false)
-    const [dataUser, setDataUser] = useState<DocumentData | null>(null)
+    const [userDataBase, setUserDatabase] = useState<DocumentData | undefined>(undefined)
 
     useEffect(() => {
-        const checkUserAvatar = async () => {
-            if (userSession.user?.email) {
-                const user = await getUsersAction('email', '==', userSession.user.email);
-                if (user) {
-                    setIsDefaultAvatar(user.data.avatar === 'default');
-                }
-            }
+        const fetchUser = async () => {
+            const user = await getUsersAction('email', '==', userSession.user?.email)
+            setUserDatabase(user?.data)
         }
+        fetchUser()
 
-        checkUserAvatar()
     }, [userSession.user?.email])
 
     return (
         <div
-            className="header-box pt-2 pb-4 d-flex justify-content-center align-items-center gap-3 ps-3"
+            className="header-box pt-2 pb-4 d-flex justify-content-start align-items-center gap-3 ps-3"
         >
 
             <div className="img-avatar">
-                {isDefaultAvatar ?
-                    <img src={userDefault} alt="user-default" />
-                : <img src={dataUser?.avatar} alt="user-default" />}
+                {userDataBase?.avatar !== 'default' ?
+                    <img src={userDataBase?.avatar} alt="user-avatar" /> :
+                    <img src={userDefault} alt="user-default" />}
             </div>
 
 
-            <h1 className="fs-4 me-3 title-email text-black">{userSession.user?.email}</h1>
+            <h1 className="fs-5 me-3 title-email text-black">{userSession.user?.email}</h1>
         </div>
     )
 }

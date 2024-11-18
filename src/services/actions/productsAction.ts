@@ -1,5 +1,5 @@
 import { WhereFilterOp } from "firebase/firestore"
-import { addProductsAccess, getProductsAccess, setProductsAccess, updateProductsAccess } from "../dataAccess/productsAccess"
+import { addProductsAccess, getAllProductsAccess, getProductsAccess, setProductsAccess, updateProductsAccess } from "../dataAccess/productsAccess"
 
 export const addProductsAction = async (data: object) => {
     const response = await addProductsAccess(data)
@@ -18,5 +18,11 @@ export const getProductsAction = async (field: string, opStr: WhereFilterOp, val
 
 export const updateProductsAction = async (documentId: string, data: object) => {
     const response = await updateProductsAccess(documentId, data)
+    return response
+}
+
+
+export const getAllProductsAction = async () => {
+    const response = await getAllProductsAccess()
     return response
 }

@@ -1,29 +1,24 @@
-html,
-body {
-    background-color: var(--white-secondary);
-}
-
 #dashboard {
     height: 100vh;
     width: 100%;
 
-    .search-bar {
-        width: 670px;
-        height: 50px;
-        display: flex;
+    // .search-bar {
+    //     width: 670px;
+    //     height: 50px;
+    //     display: flex;
 
-        .search-input {
-            border: none;
-            border-radius: 8px 0px 0px 8px;
-        }
+    //     .search-input {
+    //         border: none;
+    //         border-radius: 8px 0px 0px 8px;
+    //     }
 
-        .search-button {
-            border: none;
-            border-left: 1px solid rgb(226, 226, 226);
-            border-radius: 0px 8px 8px 0px;
-            background-color: #fff;
-        }
-    }
+    //     .search-button {
+    //         border: none;
+    //         border-left: 1px solid rgb(226, 226, 226);
+    //         border-radius: 0px 8px 8px 0px;
+    //         background-color: #fff;
+    //     }
+    // }
 
     .section {
         .box-total-stocks {
@@ -75,11 +70,21 @@ body {
             .dropdown-menu {
                 max-height: 310px;
                 overflow: auto;
+                &::-webkit-scrollbar {
+                    width: 5px;
+                    background-color: #F5F5F5;
+                }
+    
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 8px;
+                    background-color: var(--light-green);
+                }
 
                 .dropdown-item {
                     border-radius: 8px;
                     border: none;
                     flex-wrap: wrap;
+                    background-color: #fff;
 
                     &:hover {
                         cursor: pointer;
@@ -123,9 +128,19 @@ body {
             border-radius: 8px;
             background-color: #fff;
             overflow: auto;
-            padding: 40px;
+            padding: 30px;
             border-color: transparent;
             transition: border-color 350ms ease-in-out, transform 400ms ease-in-out;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+                background-color: #F5F5F5;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 8px;
+                background-color: var(--light-green);
+            }
 
             &:hover {
                 border: 1px solid var(--light-green);
@@ -189,6 +204,7 @@ body {
         .section {
             .box {
                 background-size: 110px;
+
                 div {
                     height: 180px;
 
@@ -219,9 +235,7 @@ body {
             }
 
             .table-items {
-                padding: 5px;
-                padding-top: 10px;
-
+                padding: 20px;
             }
         }
     }

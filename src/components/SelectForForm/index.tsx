@@ -25,7 +25,7 @@ export default function SelectForForm<T extends FieldValues>({ id, registrationN
         currentValue: SingleValue<OptionsType>
     ) => {
         setSelectedOption(currentValue!)
-        setValue(registrationName as Path<T>, currentValue ? currentValue.label as PathValue<T, Path<T>> : '' as PathValue<T, Path<T>>)
+        setValue(registrationName as Path<T>, currentValue ? currentValue.value as PathValue<T, Path<T>> : '' as PathValue<T, Path<T>>)
         onChange && onChange(currentValue!)
     }
 
@@ -56,7 +56,7 @@ export default function SelectForForm<T extends FieldValues>({ id, registrationN
                     value={options.find(s => s.value === selectedOption?.value)}
                     onChange={(currentValue) => {
                         handleChange(currentValue as SingleValue<OptionsType>)
-                        return onChange((currentValue as OptionsType).label);
+                        return onChange((currentValue as OptionsType).value);
                     }}
                 ></Select>
             )}

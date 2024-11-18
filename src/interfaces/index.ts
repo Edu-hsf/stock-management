@@ -8,13 +8,11 @@ export interface ComponentProps {
 
 export interface ProductType {
     name: string;
-    productCode: string;
+    code: string;
     storage: string;
     category: string;
     price: string;
     currencyOptions: string;
-    length: string;
-    lengthOptions: string;
     stockMin: string;
     stockMax: string;
     quantity: string;

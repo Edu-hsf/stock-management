@@ -10,6 +10,11 @@
     --white-secondary: #F2F2F2;
 }
 
+html,
+body {
+    background-color: var(--white-secondary);
+}
+
 .btn-light-green {
     border: 1px solid var(--light-green);
     color: var(--light-green);

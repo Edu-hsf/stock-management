@@ -38,7 +38,7 @@ export default function StockTables({ stockName, tableProducts }: StockTablesPro
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col" className="stock-name cursor-pointer" onClick={toggleContent}>
+                            <th scope="col" className="stock-name cursor-pointer" onClick={toggleContent} style={{ width: "20%" }}>
                                 <img
                                     src={arrow}
                                     alt="green-arrow"
@@ -49,10 +49,10 @@ export default function StockTables({ stockName, tableProducts }: StockTablesPro
                                 />
                                 <span>{stockName}</span>
                             </th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Code</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Price</th>
+                            <th scope="col" style={{ width: "20%" }}>Quantity</th>
+                            <th scope="col" style={{ width: "20%" }}>Code</th>
+                            <th scope="col" style={{ width: "20%" }}>Category</th>
+                            <th scope="col" style={{ width: "20%" }}>Price</th>
                         </tr>
                     </thead>
                 

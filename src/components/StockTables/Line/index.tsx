@@ -13,13 +13,13 @@ export default function Line({ name, quantity, code, category, price }: lineProp
     })
     return (
         <tr>
-            <th scope="row" className="product-name">
+            <th scope="row" className="product-name" style={{ width: "20%" }}>
                 {name}
             </th>
-            <td>{quantity}</td>
-            <td>{code}</td>
-            <td>{category}</td>
-            <td>{price}</td>
+            <td style={{ width: "20%" }}>{quantity}</td>
+            <td style={{ width: "20%" }}>{code}</td>
+            <td style={{ width: "20%" }}>{category}</td>
+            <td style={{ width: "20%" }}>{price}</td>
         </tr>
     )
 }

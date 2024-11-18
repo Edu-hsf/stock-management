@@ -88,7 +88,7 @@ export default function SideBar() {
                             </ActiveThemeItemProvider>
                         </li>
                         <Link
-                            to="/"
+                            to="/settings"
                             className="text-decoration-none"
                         >
                             <List

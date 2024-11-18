@@ -2,14 +2,21 @@ import './styles.scss'
 import { useContext } from 'react'
 import { NumericFormat } from 'react-number-format'
 import { Controller } from 'react-hook-form'
-import { currencyOptions, lengthOptions, stocksOptions } from './dataSessionOptions'
+import { currencyOptions } from './dataSessionOptions'
 import { ProductFormContext } from '../../CreateProductContexts/ProductFormContext'
 import { SelectedValueContext } from '../../CreateProductContexts/SelectedValueContext'
 import { ComponentProps } from '../../../../interfaces'
 import SelectForForm from '../../../SelectForForm'
 import { FormGroup } from '../../../FormGroup'
+import { StockListContext } from '../../../../Context/StockListContext'
+
+type selectInputType = {
+    value: string,
+    label: string
+}
 
 export default function DataSession({ className }: ComponentProps) {
+    const { stocks } = useContext(StockListContext)!
     const { register, setValue, errors, control } = useContext(ProductFormContext)!
     const {
         randomCode,
@@ -22,10 +29,16 @@ export default function DataSession({ className }: ComponentProps) {
         setPriceValue
     } = useContext(SelectedValueContext)!
 
+    const stockOptions: selectInputType[] = []
+
+    stocks.forEach((stock) => {
+        stockOptions.push({value: stock.id, label: stock.data.name})
+    })
+
     const handleGenerateCode = () => {
         const newCode = '#' + Math.floor(Math.random() * 1000000000).toString().padStart(9, '0')
         setRandomCode(newCode)
-        setValue('productCode', newCode, { shouldValidate: true })
+        setValue('code', newCode, { shouldValidate: true })
     }
 
     return (
@@ -50,14 +63,14 @@ export default function DataSession({ className }: ComponentProps) {
                     <FormGroup.Input
                         readOnly
                         type="text"
-                        className={`${errors.productCode && "error-input"}`}
+                        className={`${errors.code && "error-input"}`}
                         placeholder="#3907685..."
                         defaultValue={randomCode}
-                        {...register('productCode')}
+                        {...register('code')}
                     />
                     <button className="btn btn-orange" type="button" onClick={handleGenerateCode}>Generate</button>
                 </FormGroup.InputGroup>
-                <FormGroup.ErrorMessage text={errors.productCode?.message} />
+                <FormGroup.ErrorMessage text={errors.code?.message} />
             </FormGroup.Root>
 
             <FormGroup.Root>
@@ -95,7 +108,7 @@ export default function DataSession({ className }: ComponentProps) {
                                 decimalSeparator={isReal ? ',' : '.'}
                                 thousandSeparator={isReal ? '.' : ','}
                                 placeholder={isReal ? '99,99' : '99.99'}
-                                onChangeCapture={val => setPriceValue(val.target.value)}
+                                onChangeCapture={(val: React.ChangeEvent<HTMLInputElement>) => setPriceValue(val.target.value)}
                                 defaultValue={priceValue ? priceValue?.replace(',', '.') : null}
                                 onValueChange={(values) => {
                                     onChange(values.floatValue); // Passa o valor numérico puro
@@ -108,35 +121,14 @@ export default function DataSession({ className }: ComponentProps) {
             </FormGroup.Root>
 
             <FormGroup.Root>
-                <FormGroup.Label text='Length' forId='length' />
-                <FormGroup.InputGroup>
-                    <SelectForForm
-                        id='lengthOptions'
-                        control={control}
-                        registrationName='lengthOptions'
-                        setValue={setValue}
-                        options={lengthOptions}
-                        defaultValue={lengthOptions[0]}
-                    />
-                    <FormGroup.Input
-                        className={`${errors.length && "error-input"}`}
-                        id="length"
-                        placeholder="38"
-                        {...register('length')}
-                    />
-                </FormGroup.InputGroup>
-                <FormGroup.ErrorMessage text={errors.length?.message} />
-            </FormGroup.Root>
-
-            <FormGroup.Root>
                 <FormGroup.Label text='Storage' isImportant />
                 <FormGroup.InputGroup>
                     <SelectForForm
                         defaultValue={selectedStorage}
                         control={control}
-                        registrationName='storage'
+                        registrationName='stockID'
                         setValue={setValue}
-                        options={stocksOptions}
+                        options={stockOptions}
                         placeholder='Choose...'
                         error={errors.storage && true}
                         onChange={val => setSelectedStorage(val)}

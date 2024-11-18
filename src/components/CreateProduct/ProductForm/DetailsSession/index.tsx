@@ -44,7 +44,7 @@ export default function DetailsSession({ className }: ComponentProps) {
                     {...register('imageProduct')}
                     onChange={handleImageChange}
                 />
-                <FormGroup.ErrorMessage text={errors.description?.message} />
+                <FormGroup.ErrorMessage text={errors.imageProduct?.message} />
             </FormGroup.Root>
         </div>
     )

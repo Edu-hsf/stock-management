@@ -2,18 +2,16 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const schema = z.object({
-    name: z.string().min(1, 'Enter a name.').max(25, 'Maximum size reached.'),
-    productCode: z.string().min(1, 'Generate a random code.'),
-    storage: z.string().min(1, 'Choose a storage location.'),
+    name: z.string().min(1, 'Enter a name.').max(50, 'Maximum size reached.'),
+    code: z.string().min(1, 'Generate a random code.'),
+    stockID: z.string().min(1, 'Choose a storage location.'),
     category: z.string().min(1, 'Choose a category.').max(25, 'Maximum size reached.'),
     price: z.coerce.number().max(1000000000, 'Maximum size reached.').min(1, 'Enter the price of your product').refine(val => val >= 0, { message: 'The value cannot be negative.' }),
     currencyOptions: z.string().optional(),
-    length: z.coerce.number().max(1000000000, 'Maximum size reached.').refine(val => val >= 0, { message: 'The value cannot be negative.' }).optional(),
-    lengthOptions: z.string().optional(),
     stockMin: z.coerce.number().max(1000000000, 'Maximum size reached.').refine(val => val >= 0, { message: 'The value cannot be negative.' }).optional(),
     stockMax: z.coerce.number().max(1000000000, 'Maximum size reached.').refine(val => val >= 0, { message: 'The value cannot be negative.' }).optional(),
     quantity: z.coerce.number().positive('Enter a quantity greater than zero.').max(1000000000, 'Maximum size reached.'),
-    description: z.string().max(256, 'Maximum size reached.').optional(),
+    description: z.string().max(1000, 'Maximum size reached.').optional(),
     imageProduct: z.union([z.instanceof(FileList).transform(list => list[0]), z.string().optional()]).transform(value => value === undefined ? value = '' : value).optional(),
 }).refine(val => val.stockMin! <= val.stockMax!, {
     message: 'The minimum stock must be less than the maximum stock.',
@@ -30,13 +28,11 @@ export const productSchema = {
     resolver: zodResolver(schema),
     defaultValues: {
         name: '',
-        productCode: '',
-        storage: '',
+        code: '',
+        stockID: '',
         category: '',
         price: '',
         currencyOptions: 'dollar',
-        length: '',
-        lengthOptions: 'metre',
         stockMin: '',
         stockMax: '',
         quantity: '',
