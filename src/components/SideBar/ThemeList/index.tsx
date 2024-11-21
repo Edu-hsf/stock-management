@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
-import { ActiveThemeItemContext } from "../../../Context/ActiveThemeItemContext"
-import { ComponentProps } from "../../../interfaces"
+import { ActiveThemeItemContext } from "@/Context/ActiveThemeItemContext"
+import { ComponentProps } from "@/interfaces"
 
 interface ThemeList extends ComponentProps {
     id: number

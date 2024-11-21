@@ -2,8 +2,8 @@ import './styles.scss'
 import { ChangeEvent, useContext } from 'react'
 import { ProductFormContext } from '../../CreateProductContexts/ProductFormContext';
 import { SelectedValueContext } from '../../CreateProductContexts/SelectedValueContext';
-import { ComponentProps } from '../../../../interfaces';
-import { FormGroup } from '../../../FormGroup';
+import { ComponentProps } from '@/interfaces';
+import { FormGroup } from '@/components/FormGroup';
 
 export default function DetailsSession({ className }: ComponentProps) {
     const { register, errors } = useContext(ProductFormContext)!

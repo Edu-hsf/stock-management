@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { ComponentProps } from "../../../interfaces";
+import { ComponentProps } from "@/interfaces";
 
 export interface ShowSessionContextType extends ComponentProps {
     showSession?: string;

@@ -1,10 +1,10 @@
 import "./styles.scss"
-import Title from "../../../components/Title"
-import StockTables from "../../../components/StockTables"
+import Title from "@/components/Title"
+import StockTables from "@/components/StockTables"
 import { Link } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
-import { StockListContext } from "../../../Context/StockListContext"
-import { getProductsAction } from "../../../services/actions/productsAction"
+import { StockListContext } from "@/Context/UserStockList"
+import { getProductsAction } from "@/services/actions/productsAction"
 
 interface dataType {
     name: string,

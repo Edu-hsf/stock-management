@@ -1,4 +1,4 @@
-import CreateProduct from '../../../components/CreateProduct'
+import CreateProduct from '@/components/CreateProduct'
 import './styles.scss'
 
 export default function Product() {

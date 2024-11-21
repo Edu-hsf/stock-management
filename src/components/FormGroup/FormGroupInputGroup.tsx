@@ -1,4 +1,4 @@
-import { ComponentProps } from "../../interfaces";
+import { ComponentProps } from "@/interfaces";
 
 export default function FormGroupInputGroup ({ children }: ComponentProps) {
     return (

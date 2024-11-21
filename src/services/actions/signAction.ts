@@ -1,4 +1,11 @@
 import { logOutAccess, signInAccess, signInWithGoogleAccess, signUpAccess } from "../dataAccess/signAccess"
+export interface DataUserType {
+    name: string,
+    surname: string,
+    email: string,
+    password: string
+    avatar: string,
+}
 
 export const signInWithGoogleAction = async () => {
     const response = await signInWithGoogleAccess()
@@ -10,8 +17,8 @@ export const signInAction = async (email: string, password: string) => {
     return response
 }
 
-export const signUpAction = async (email: string, password: string, name: string) => {
-    const response = await signUpAccess(email, password, name)
+export const signUpAction = async (data: DataUserType) => {
+    const response = await signUpAccess(data)
     return response
 }
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AlertType, StyledAlertSuccess } from "../Alert.styles";
-import { ComponentProps } from "../../../interfaces";
+import { ComponentProps } from "@/interfaces";
 
 type DirectionTypes = 'up' | 'down'
 

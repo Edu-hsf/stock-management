@@ -1,7 +1,8 @@
-import { createContext, useEffect, useState } from "react";
-import { ComponentProps } from "../interfaces";
+import { createContext, useContext, useEffect, useState } from "react";
+import { ComponentProps } from "@/interfaces";
 import { DocumentData } from "firebase/firestore";
-import { getAllProductsAction } from "../services/actions/productsAction";
+import { AuthContext } from "./AuthContext";
+import { getProductsAction } from "@/services/actions/productsAction";
 
 interface ProductListType {
     products: Array<DocumentData>
@@ -11,10 +12,11 @@ export const ProductListContext = createContext<ProductListType | null>(null)
 
 export const ProductListProvider = ({ children }: ComponentProps) => {
     const [products, setProducts] = useState<DocumentData[]>([])
+    const { userSession } = useContext(AuthContext)!
 
     useEffect(() => {
         const fetchProducts = async () => {
-            setProducts(await getAllProductsAction())
+            setProducts(await getProductsAction('userUID', '==', userSession.user?.uid))
         }
         fetchProducts()
     }, [])

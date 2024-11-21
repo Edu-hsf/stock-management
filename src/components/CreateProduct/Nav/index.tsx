@@ -17,7 +17,7 @@ export default function Nav() {
                         setShowSession={setShowSession}
                         id={1}
                     >
-                        {errors.name || errors.price || errors.category || errors.storage || errors.productCode || errors.length ? (
+                        {errors.name || errors.price || errors.category || errors.storage || errors.code ? (
                             <>
                                 Data
                                 <span className='text-danger ms-1'>!</span>

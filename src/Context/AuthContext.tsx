@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
-import { auth } from '../services/firebaseConfig';
+import { auth } from '@/services/firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { ComponentProps, } from '../interfaces';
+import { ComponentProps, } from '@/interfaces';
 
 export interface AuthContextType {
     userSession: {

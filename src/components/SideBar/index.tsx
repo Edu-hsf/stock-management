@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import "./styles.scss"
 import List from "./SideBarList/index.js"
 import { useContext } from "react"
-import { ActiveListItemProvider } from '../../Context/ActiveListItemContext.js'
-import { ActiveThemeItemProvider } from "../../Context/ActiveThemeItemContext.js"
+import { ActiveListItemProvider } from '@/Context/ActiveListItemContext.js'
+import { ActiveThemeItemProvider } from "@/Context/ActiveThemeItemContext.js"
 import ThemeList from "./ThemeList/index.js"
 import HeaderSideBar from "./HeaderSideBar/index.js"
-import { OpenSideBarContext } from "../../Context/OpenSideBarContext.js"
+import { OpenSideBarContext } from "@/Context/OpenSideBarContext.js"
 
 export default function SideBar() {
     const { openSideBar } = useContext(OpenSideBarContext)!
-    
+
     return (
         <div className="main-container d-flex">
             <div style={{ borderRight: "1px solid #BDBEBF", display: `${openSideBar}` }} className={`sidebar ${openSideBar ? 'd-none' : 'd-block'} d-xl-block`}>
@@ -25,9 +25,9 @@ export default function SideBar() {
                         >
                             <List
                                 id={1}
-                                className="text-decoration-none item px-3 py-2 d-block"
+                                className=" text-decoration-none item px-3 py-2 d-block"
                             >
-                                <i className="fa-solid fa-house me-1"></i> DashBoard
+                                <i className="fa-solid fa-house me-1"></i> Dashboard
                             </List>
                         </Link>
 
@@ -39,7 +39,7 @@ export default function SideBar() {
                                 id={2}
                                 className="text-decoration-none item px-3 py-2 d-block"
                             >
-                                <i className="fa-solid fa-cart-shopping"></i> Product
+                                <i className="fa-solid fa-cart-shopping"></i> Create Product
                             </List>
                         </Link>
 

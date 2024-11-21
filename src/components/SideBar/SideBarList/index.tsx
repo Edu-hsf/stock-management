@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
-import { ActiveListItemContext } from "../../../Context/ActiveListItemContext"
-import { ComponentProps } from "../../../interfaces"
+import { ActiveListItemContext } from "@/Context/ActiveListItemContext"
+import { ComponentProps } from "@/interfaces"
 
 interface ListType extends ComponentProps {
     id: number

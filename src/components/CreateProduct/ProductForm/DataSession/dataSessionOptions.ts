@@ -1,5 +1,5 @@
 import { FieldErrors } from "react-hook-form"
-import { ProductType } from "../../../../interfaces"
+import { ProductType } from "@/interfaces"
 import { StylesConfig } from "react-select"
 
 export const currencyOptions = [

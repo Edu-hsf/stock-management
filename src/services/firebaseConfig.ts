@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserCredential, signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage"
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -22,3 +23,4 @@ auth.languageCode = 'en';
 export const provider = new GoogleAuthProvider();
 
 export const db = getFirestore(app);
+export const storage = getStorage(app)

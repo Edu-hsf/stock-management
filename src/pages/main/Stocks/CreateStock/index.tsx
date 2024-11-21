@@ -1,13 +1,13 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { FormGroup } from '../../../../components/FormGroup'
-import Title from '../../../../components/Title'
+import { FormGroup } from '@/components/FormGroup'
+import Title from '@/components/Title'
 import './styles.scss'
 import { stockSchema } from './StockSchema'
-import { AuthContext } from '../../../../Context/AuthContext'
+import { AuthContext } from '@/Context/AuthContext'
 import { useContext, useState } from 'react'
-import AlertDanger from '../../../../components/Alert/AlertDanger'
-import AlertSuccess from '../../../../components/Alert/AlertSuccess'
-import { addStocksAction } from '../../../../services/actions/stocksAction'
+import AlertDanger from '@/components/Alert/AlertDanger'
+import AlertSuccess from '@/components/Alert/AlertSuccess'
+import { addStocksAction } from '@/services/actions/stocksAction'
 
 interface StockType {
     name: string,

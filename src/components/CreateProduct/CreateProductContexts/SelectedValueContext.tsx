@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { ComponentProps, ProductType } from "../../../interfaces";
+import { ComponentProps, ProductType } from "@/interfaces";
 
 export interface OptionsType {
     label: string;

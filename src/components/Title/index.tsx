@@ -1,4 +1,4 @@
-import { ComponentProps } from '../../interfaces'
+import { ComponentProps } from '@/interfaces'
 import './styles.scss'
 
 export default function Title ({children, className}: ComponentProps) {

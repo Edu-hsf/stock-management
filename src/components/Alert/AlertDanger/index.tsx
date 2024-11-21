@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyledAlertDanger } from "../Alert.styles";
-import { ComponentProps } from "../../../interfaces";
+import { ComponentProps } from "@/interfaces";
 
 export default function AlertDanger ({ children, className }: ComponentProps) {
     const [direction, setDirection] = useState('')

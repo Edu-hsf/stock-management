@@ -1,5 +1,5 @@
 import "./styles.scss"
-import arrow from "../../assets/green-arrow.png"
+import arrow from "@/assets/green-arrow.png"
 import { StyledTable } from "./StockTable.styles"
 import { useEffect, useRef, useState } from "react";
 import Line from "./Line";

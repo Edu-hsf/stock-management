@@ -1,23 +1,34 @@
 import { signInWithPopup, UserCredential, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
 import { auth, provider } from "../firebaseConfig";
-import { addUsersAction, getUsersAction, updateUsersAction } from "../actions/usersAction";
+import { addUsersAction, getUsersAction } from "../actions/usersAction";
+import { DataUserType } from "../actions/signAction";
 
 export const signInWithGoogleAccess = async (): Promise<UserCredential> => {
   return await signInWithPopup(auth, provider)
     .then(async result => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const dataUser = await getUsersAction('email', '==', result.user.email)
+      console.log('ok1')
       if (!dataUser) {
+        console.log('ok2')
+        const fullName = result.user.displayName?.split(' ')
+        const name = fullName ? fullName[0] : ''
+        const surname = fullName && fullName[1] ? fullName[1] : ''
+        console.log(name)
+        console.log(surname)
+
         const user = {
-          avatar: 'default',
+          name: name,
+          surname: surname,
           email: result.user.email,
-          isAuthWithGoogle: true,
-          name: result.user.displayName,
+          avatar: result.user.photoURL,
           userUID: result.user.uid
         }
-        addUsersAction(user)
+
+        await addUsersAction(user)
       }
       return credential;
+
 
     }).catch((error) => {
       const errorCode = error.code;
@@ -27,32 +38,29 @@ export const signInWithGoogleAccess = async (): Promise<UserCredential> => {
     });
 }
 
-export const signUpAccess = async (email: string, password: string, name: string) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(async (userCredential) => {
-      const user = userCredential.user;
-      updateProfile(user, {
-        displayName: name
-      })
-      const documentUser = await getUsersAction('email', '==', user.email)
-      if (documentUser) updateUsersAction(documentUser?.id, { uid: user.uid })
+export const signUpAccess = async (data: DataUserType) => {
+  const { password, ...dataUser } = data
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+    updateProfile(userCredential.user, {
+      displayName: data.name.charAt(0).toUpperCase() + data.name.slice(1) + " " + data.surname.charAt(0).toUpperCase() + data.surname.slice(1)
     })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
+
+    await addUsersAction({ ...dataUser, uid: userCredential.user.uid })
+
+  } catch (error) {
+    throw error
+  }
 }
 
 export const signInAccess = async (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    throw error;
+  }
 
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
 }
 
 export const logOutAccess = async () => {

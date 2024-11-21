@@ -22,14 +22,14 @@
 
     .section {
         .box-total-stocks {
-            background-image: url('../../../assets/stock-icon-green.png');
+            background-image: url('@/assets/stock-icon-green.png');
             background-repeat: no-repeat;
             background-position: 98%;
             background-size: 200px;
         }
 
         .box-total-products {
-            background-image: url('../../../assets/products-icon-green.png');
+            background-image: url('@/assets/products-icon-green.png');
             background-repeat: no-repeat;
             background-position: 94%;
             background-size: 200px;

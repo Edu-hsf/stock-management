@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png"
+import logo from "@/assets/logo.png"
 import "./styles.scss"
 import { useContext } from "react";
-import { OpenSideBarContext } from "../../Context/OpenSideBarContext";
-import { LogOutAction } from "../../services/actions/signAction";
+import { OpenSideBarContext } from "@/Context/OpenSideBarContext";
+import { LogOutAction } from "@/services/actions/signAction";
 
 export default function Header() {
     const { changeSideBar } = useContext(OpenSideBarContext)!

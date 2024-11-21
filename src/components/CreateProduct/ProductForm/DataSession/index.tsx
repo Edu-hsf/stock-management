@@ -5,10 +5,10 @@ import { Controller } from 'react-hook-form'
 import { currencyOptions } from './dataSessionOptions'
 import { ProductFormContext } from '../../CreateProductContexts/ProductFormContext'
 import { SelectedValueContext } from '../../CreateProductContexts/SelectedValueContext'
-import { ComponentProps } from '../../../../interfaces'
-import SelectForForm from '../../../SelectForForm'
-import { FormGroup } from '../../../FormGroup'
-import { StockListContext } from '../../../../Context/StockListContext'
+import { ComponentProps } from '@/interfaces'
+import SelectForForm from '@/components/SelectForForm'
+import { FormGroup } from '@/components/FormGroup'
+import { StockListContext } from '@/Context/UserStockList'
 
 type selectInputType = {
     value: string,
@@ -54,7 +54,7 @@ export default function DataSession({ className }: ComponentProps) {
                         {...register('name')}
                     />
                 </FormGroup.InputGroup>
-                <FormGroup.ErrorMessage text={errors.name ? errors.name.message! : ''} />
+                <FormGroup.ErrorMessage text={errors.name?.message} />
             </FormGroup.Root>
 
             <FormGroup.Root>
@@ -83,7 +83,7 @@ export default function DataSession({ className }: ComponentProps) {
                         {...register('category')}
                     />
                 </FormGroup.InputGroup>
-                <FormGroup.ErrorMessage text={errors.category && errors.category.message} />
+                <FormGroup.ErrorMessage text={errors.category?.message} />
             </FormGroup.Root>
 
             <FormGroup.Root>
@@ -117,7 +117,7 @@ export default function DataSession({ className }: ComponentProps) {
                         )}
                     />
                 </FormGroup.InputGroup>
-                <FormGroup.ErrorMessage text={errors.price && errors.price.message} />
+                <FormGroup.ErrorMessage text={errors.price?.message} />
             </FormGroup.Root>
 
             <FormGroup.Root>
@@ -134,7 +134,7 @@ export default function DataSession({ className }: ComponentProps) {
                         onChange={val => setSelectedStorage(val)}
                     />
                 </FormGroup.InputGroup>
-                <FormGroup.ErrorMessage text={errors.storage && errors.storage.message} />
+                <FormGroup.ErrorMessage text={errors.storage?.message} />
             </FormGroup.Root>
         </div>
     )

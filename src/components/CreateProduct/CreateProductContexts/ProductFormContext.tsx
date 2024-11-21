@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Control, FieldErrors, FieldValues, useForm, UseFormHandleSubmit, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import { productSchema } from "../productSchema";
-import { ComponentProps, ProductType } from "../../../interfaces";
+import { ComponentProps, ProductType } from "@/interfaces";
 
 interface ProductFormContextType {
     register: UseFormRegister<ProductType>;

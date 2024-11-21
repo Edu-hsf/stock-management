@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MoveType } from '../../../../pages/Login'
+import { MoveType } from '@/pages/Login'
 
 export const StyledBanner = styled.div<MoveType>`
     height: 100%;

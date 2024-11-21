@@ -1,9 +1,9 @@
-import { StyledBanner } from "../../components/Login/Content/Banner/Banners.styles"
-import { StyledContent } from "../../components/Login/Content/Content.styles.tsx"
-import { StyledLogin } from "../../components/Login/Login.styles"
-import SignIn from "../../components/Login/Content/Sign-in"
-import SignUp from "../../components/Login/Content/Sign-up"
-import banner from '../../assets/login-banner.png'
+import { StyledBanner } from "@/components/Login/Content/Banner/Banners.styles"
+import { StyledContent } from "@/components/Login/Content/Content.styles.tsx"
+import { StyledLogin } from "@/components/Login/Login.styles"
+import SignIn from "@/components/Login/Content/Sign-in"
+import SignUp from "@/components/Login/Content/Sign-up"
+import banner from '@/assets/login-banner.png'
 import { useState } from "react"
 
 export interface MoveType {

@@ -6,21 +6,23 @@ import { useContext, useState } from 'react'
 import { SelectedValueProvider } from '../CreateProductContexts/SelectedValueContext'
 import { ProductFormContext } from '../CreateProductContexts/ProductFormContext'
 import { ShowSessionContext } from '../CreateProductContexts/ShowSessionContext'
-import { addProductsAction, getProductsAction } from '../../../services/actions/productsAction'
+import { addProductsAction, getProductsAction } from '@/services/actions/productsAction'
 import AlertDanger from '../../Alert/AlertDanger'
 import AlertSuccess from '../../Alert/AlertSuccess'
+import { AuthContext } from '@/Context/AuthContext'
 
 export default function ProductForm() {
     const { handleSubmit } = useContext(ProductFormContext)!
     const { showSession } = useContext(ShowSessionContext)!
+    const { userSession } = useContext(AuthContext)!
     const [alert, setAlert] = useState('')
 
-    const onSubmit = handleSubmit (async (data) => {
+    const onSubmit = handleSubmit(async (data) => {
         const thisCodeExists = await getProductsAction('productCode', '==', data.code)
         if (thisCodeExists.length) {
             setAlert('failed')
         } else {
-            addProductsAction({...data, createdAt: new Date()})
+            addProductsAction({ ...data, createdAt: new Date(), userUID: userSession.user?.uid })
             setAlert('success')
             setTimeout(() => {
                 window.location.reload()

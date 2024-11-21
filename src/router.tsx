@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout.tsx";
 import Stocks from "./pages/main/Stocks";
-import DashBoard from "./pages/main/Dashboard";
-import Product from "./pages/main/Product";
+import DashBoard from "./pages/Dashboard";
+import Product from "./pages/Product";
 import Login from "./pages/Login";
 import { RedirectHome, RedirectLogin } from "./components/AuthRedirect";
 import { AuthProvider } from "./Context/AuthContext.tsx";
 import CreateStock from "./pages/main/Stocks/CreateStock/index.tsx";
-import { StockListProvider } from "./Context/StockListContext.tsx";
+import { StockListProvider } from "./Context/UserStockList.tsx";
 import { ProductListProvider } from "./Context/ProductListContext.tsx";
-import Settings from "./pages/main/SettingsPage/index..tsx";
+import Settings from "./pages/SettingsPage/index..tsx";
 
 export const AppRoutes = () => {
     return (

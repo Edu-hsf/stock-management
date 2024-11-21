@@ -1,30 +1,29 @@
 import { Link } from 'react-router-dom'
 import './styles.scss'
-import Title from '../../../components/Title';
-import PieChart from '../../../components/PieChart';
+import Title from '@/components/Title';
+import PieChart from '@/components/PieChart';
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../Context/AuthContext';
-import { StockListContext } from '../../../Context/StockListContext';
-import { ProductListContext } from '../../../Context/ProductListContext';
+import { AuthContext } from '@/Context/AuthContext';
+import { StockListContext } from '@/Context/UserStockList';
+import { ProductListContext } from '@/Context/ProductListContext';
 import { DocumentData } from 'firebase/firestore';
 
 export default function DashBoard() {
     const { userSession } = useContext(AuthContext)!
-    const userName = userSession.user?.displayName ? userSession.user.displayName[0].toUpperCase() + userSession.user.displayName.substring(1) : ''
     const { stocks } = useContext(StockListContext)!
     const { products } = useContext(ProductListContext)!
     const [productsSort, setProductsSort] = useState<DocumentData[]>([])
 
     useEffect(() => {
         setProductsSort(
-            [...products].sort((a, b) => b.data.createdAt.seconds - a.data.createdAt.seconds)
+            [...products].sort((a, b) => b.data.createdAt.seconds - a.data.createdAt.seconds).slice(0, 5)
         )
 
     }, [products])
 
     return (
         <div id="dashboard" className="container-fluid px-4 pt-2">
-            <Title>Hello, {userName}!</Title>
+            <Title>Hello, {userSession.user?.displayName}!</Title>
 
             <div className="section">
                 <div className='row mb-4'>
@@ -48,8 +47,8 @@ export default function DashBoard() {
                             <i className="fa-brands fa-stack-overflow"></i> Stored items
                         </button>
                         <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardItems">
-                            {products.map((product) => (
-                                <div key={product.id}>
+                            {products.map((product, i) => (
+                                <div key={i}>
                                     <li className="dropdown-item d-flex justify-content-between">
                                         <div>
                                             <div className='item-name'>{product.data.name}</div>
@@ -71,8 +70,8 @@ export default function DashBoard() {
                             <i className="fa-solid fa-box"></i> Stocks
                         </button>
                         <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardStocks">
-                            {stocks.map((stock) => (
-                                <div key={stock.id}>
+                            {stocks.map((stock, i) => (
+                                <div key={i}>
                                     <li className="dropdown-item d-flex justify-content-between">
                                         <div>
                                             <div className='stock-name'>{stock.data.name}</div>
@@ -101,13 +100,13 @@ export default function DashBoard() {
                                 <thead>
                                     <tr>
                                         <th scope="col" style={{ width: "30%" }}>Nome</th>
-                                        <th scope="col" style={{ width: "30%" }}>Categoria</th>
+                                        <th scope="col" style={{ width: "30%" }}>Category</th>
                                         <th scope="col" style={{ width: "30%" }}>ID</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {productsSort.map((product) => (
-                                        <tr>
+                                    {productsSort.map((product, i) => (
+                                        <tr key={i}>
                                             <td style={{ width: "30%" }}>{product.data.name}</td>
                                             <td style={{ width: "30%" }}>{product.data.category}</td>
                                             <td style={{ width: "30%" }}>{product.data.code}</td>

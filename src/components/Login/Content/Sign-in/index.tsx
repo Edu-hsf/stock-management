@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
-import googleIcon from '../../../../assets/google-icon.svg'
+import googleIcon from '@/assets/google-icon.svg'
 import './styles.scss'
 import { useState } from 'react'
 import { signInSchema } from './signInSchema'
-import { MoveType } from '../../../../pages/Login'
-import { signInAction, signInWithGoogleAction } from '../../../../services/actions/signAction'
+import { MoveType } from '@/pages/Login'
+import { signInAction, signInWithGoogleAction } from '@/services/actions/signAction'
 
 interface SignInType {
     emailLogin: string
@@ -16,10 +16,13 @@ interface SignInType {
 export default function SignIn({ setMove_x, setMove_y }: MoveType) {
     const { register, handleSubmit, formState: { errors } } = useForm<SignInType>(signInSchema)
     const [viewPassword, setViewPassword] = useState(false)
+    const [loginError, setLoginError] = useState<string>('')
 
-    const loginUser: SubmitHandler<SignInType> = (data) => {
-        if (data) {
-            signInAction(data.emailLogin, data.passwordLogin)
+    const loginUser: SubmitHandler<SignInType> = async (data) => {
+        try {
+            await signInAction(data.emailLogin, data.passwordLogin)
+        } catch (error) {
+            setLoginError('Incorrect email or password')
         }
     }
 
@@ -71,7 +74,7 @@ export default function SignIn({ setMove_x, setMove_y }: MoveType) {
                     ) : null}
                 </div>
 
-                {errors.unauthenticated ? <div className='w-100 fst-italic'><span style={{color: '#ff6767'}}>{String(errors.unauthenticated.message)}</span></div> : null}
+                {loginError && <div className='w-100 fst-italic'><span style={{ color: '#ff6767' }}>{loginError}</span></div>}
 
                 <button type="submit" className="w-100 btn btn-light-green mt-4">SIGN IN</button>
             </form>
