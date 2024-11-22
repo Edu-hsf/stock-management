@@ -5,7 +5,6 @@ import { signUpSchema } from "./signUpSchema"
 import { useState } from "react"
 import { MoveType } from "@/pages/Login"
 import { signInWithGoogleAction, signUpAction } from "@/services/actions/signAction"
-
 interface SignUpType {
     name: string
     surname: string

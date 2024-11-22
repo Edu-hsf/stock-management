@@ -1,0 +1,18 @@
+#validationCode {
+    .banner {
+        img {
+            width: 200px;
+        }
+    }
+
+    p {
+        color: rgb(144, 143, 143);
+    }
+
+    .input-opt {
+        display: flex;                 // Defina o display flex para usar as propriedades de centralização
+        justify-content: center;       // Centraliza horizontalmente
+        align-items: center;           // Alinha verticalmente, mas como você não quer, pode removê-lo
+        width: 100%;                   // Garante que ocupe 100% da largura disponível
+    }
+}

@@ -2,14 +2,18 @@ import "./styles.scss"
 import { ChangeEvent, useContext, useEffect, useState } from "react"
 import { FormGroup } from "@/components/FormGroup"
 import userDefault from "@/assets/user-default.png"
-import PhoneInput from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
+// import PhoneInput from 'react-phone-number-input'
+// import 'react-phone-number-input/style.css'
 import { AuthContext } from "@/Context/AuthContext"
 import { getUsersAction, updateUsersAction } from "@/services/actions/usersAction"
 import { DocumentData } from "firebase/firestore"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { profileSettingsSchema } from "./settingsSchema"
 import { deleteImageAction, uploadImageAction } from "@/services/actions/imagesAction"
+
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
+import { Link } from "react-router-dom"
 
 interface ProfileSettingsType {
     name: string,
@@ -22,8 +26,10 @@ interface ProfileSettingsType {
 export default function ProfileSettings() {
     const { userSession } = useContext(AuthContext)!
     const [userDataBase, setUserDatabase] = useState<DocumentData | null>(null)
-    const { register, setValue, formState: { errors }, handleSubmit, control } = useForm<ProfileSettingsType>(profileSettingsSchema)
-    const [ avatarPreview, setAvatarPreview ] = useState<File | null>(null)
+    const { register, setValue, formState: { errors }, handleSubmit, control, getValues } = useForm<ProfileSettingsType>(profileSettingsSchema)
+    const [avatarPreview, setAvatarPreview] = useState<File | null>(null)
+    const [phone, setPhone] = useState('');
+    console.log(userDataBase?.data.phone)
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -45,8 +51,8 @@ export default function ProfileSettings() {
         const { name, surname, email, phone, avatar } = data
         if (avatar) {
             const imgURL = await uploadImageAction('profile-pictures', userSession.user?.uid, avatar, 'profile')
-        
-            await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname, email, phone, avatar: { name: avatar.name, url: imgURL} })
+
+            await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname, email, phone, avatar: { name: avatar.name, url: imgURL } })
         } else {
             await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname, email, phone: phone || '' })
         }
@@ -81,7 +87,7 @@ export default function ProfileSettings() {
                                     type="text"
                                     {...register('name')}
                                 />
-                                <FormGroup.ErrorMessage text={errors.name?.message}/>
+                                <FormGroup.ErrorMessage text={errors.name?.message} />
                             </FormGroup.Root>
                             <FormGroup.Root>
                                 <FormGroup.Label text='Surname' />
@@ -90,7 +96,7 @@ export default function ProfileSettings() {
                                     placeholder='Enter your surname'
                                     {...register('surname')}
                                 />
-                                <FormGroup.ErrorMessage text={errors.surname?.message}/>
+                                <FormGroup.ErrorMessage text={errors.surname?.message} />
                             </FormGroup.Root>
                         </div>
                         <div className="mt-2">
@@ -100,15 +106,16 @@ export default function ProfileSettings() {
                                     type="text"
                                     {...register('email')}
                                 />
-                                <FormGroup.ErrorMessage text={errors.email?.message}/>
+                                <FormGroup.ErrorMessage text={errors.email?.message} />
                             </FormGroup.Root>
                         </div>
-                        <div className="mt-2">
-                            <FormGroup.Root>
+                        <div className="mt-2 pt-2">
+                            {/* <FormGroup.Root>
                                 <FormGroup.Label text='Number' />
                                 <Controller
                                     name="phone"
                                     control={control}
+                            
                                     render={({ field }) => (
                                         <PhoneInput
                                             {...field}
@@ -117,11 +124,39 @@ export default function ProfileSettings() {
                                             countryCallingCodeEditable={false}
                                             placeholder="Enter phone number"
                                             onChange={(value) => field.onChange(value)}
+                            
                                         />
                                     )}
                                 />
-                                <FormGroup.ErrorMessage text={errors.phone?.message}/>
-                            </FormGroup.Root>
+                                <PhoneInput
+                                    defaultCountry="eua"
+                                    value={phone}
+                                    onChange={(phone) => setPhone(phone)}
+                                    inputClassName="form-control"
+                                />
+                                <FormGroup.ErrorMessage text={errors.phone?.message} />
+                            </FormGroup.Root> */}
+
+                            {userDataBase?.data.phone ?
+                                <div className="row">
+                                    <div className="col">
+                                        <PhoneInput
+                                            defaultCountry="eua"
+                                            value={userDataBase?.data.phone}
+                                            disabled
+                                            inputClassName="form-control"
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        <button className="validation-button btn btn-light-green">Register new phone number</button>
+                                    </div>
+                                </div>
+                                :
+                                <Link to="/settings/phoneregister/form">
+                                    <button className="validation-button btn btn-light-green">Register phone number</button>
+                                </Link>
+
+                            }
                         </div>
                     </div>
                     <div className="col-2 d-flex flex-column align-items-center gap-2">

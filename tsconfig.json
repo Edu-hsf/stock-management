@@ -16,9 +16,6 @@
     }
   },
 
-  "include": [
-    "src",
-    "typings"
-  ],
+  "include": ["src", "global.d.ts"]
    // Incluindo tanto a pasta src quanto o arquivo globals.d.ts
 }
