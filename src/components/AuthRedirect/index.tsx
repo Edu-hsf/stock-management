@@ -9,7 +9,7 @@ export function RedirectHome({ children }: ComponentProps) {
 
     if (loading) return null;
 
-    if (userSession.user) {
+    if (userSession.user?.emailVerified) {
         sessionStorage.clear()
         return location.pathname === "/" ? children : <Navigate to="/" />
     } else {
@@ -23,7 +23,7 @@ export function RedirectLogin({ children }: ComponentProps) {
 
     if (loading) return null;
 
-    if (userSession.user) {
+    if (userSession.user?.emailVerified) {
         return (children)
     } else {
         sessionStorage.clear()

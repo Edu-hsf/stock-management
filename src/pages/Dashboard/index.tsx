@@ -44,10 +44,10 @@ export default function DashBoard() {
                 <div className='row'>
                     <div className="dropdown dropdown-items col-sm w-100">
                         <button className="btn btn-light-green dropdown-toggle w-100" type="button" id="dropDownDashBoardItems" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="fa-brands fa-stack-overflow"></i> Stored items
+                            <i className="fa-brands fa-stack-overflow"></i> Products
                         </button>
-                        <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardItems">
-                            {products.map((product, i) => (
+                        <ul className="dropdown-menu w-100 text-center" aria-labelledby="dropDownDashBoardItems">
+                            {products.length > 0 ? products.map((product, i) => (
                                 <div key={i}>
                                     <li className="dropdown-item d-flex justify-content-between">
                                         <div>
@@ -61,7 +61,14 @@ export default function DashBoard() {
                                     </li>
                                     <hr />
                                 </div>
-                            ))}
+                            )) :
+                                <div>
+                                    <p className='mt-3'>You do not have any registered product</p>
+                                    <Link to="/create-product">
+                                        <button className='btn btn-solid-orange dropdown-btn mb-3'>Create new product</button>
+                                    </Link>
+
+                                </div>}
                         </ul>
                     </div>
 
@@ -69,8 +76,8 @@ export default function DashBoard() {
                         <button className="btn btn-light-green dropdown-toggle w-100 shadow-sm" type="button" id="dropDownDashBoardStocks" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="fa-solid fa-box"></i> Stocks
                         </button>
-                        <ul className="dropdown-menu w-100" aria-labelledby="dropDownDashBoardStocks">
-                            {stocks.map((stock, i) => (
+                        <ul className="dropdown-menu w-100 text-center" aria-labelledby="dropDownDashBoardStocks">
+                            {stocks.length > 0 ? stocks.map((stock, i) => (
                                 <div key={i}>
                                     <li className="dropdown-item d-flex justify-content-between">
                                         <div>
@@ -80,11 +87,16 @@ export default function DashBoard() {
                                         <Link to='/'>
                                             <button className='view-stock'>View</button>
                                         </Link>
-
                                     </li>
                                     <hr />
                                 </div>
-                            ))}
+                            )) :
+                                <div>
+                                    <p className='mt-3'>You do not have any registered stock</p>
+                                    <Link to="/stocks/create-stock">
+                                        <button className='btn btn-solid-orange dropdown-btn mb-3'>Create new stock</button>
+                                    </Link>
+                                </div>}
                         </ul>
                     </div>
                 </div>

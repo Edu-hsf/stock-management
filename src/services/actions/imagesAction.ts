@@ -5,7 +5,7 @@ export const uploadImageAction = async (path: string, userUID: string | undefine
     return response
 }
 
-export const deleteImageAction = async (path: string, userUID: string | undefined, file: File, fileName: string,) => {
-    const response = await deleteImageAccess(path, userUID, file, fileName)
+export const deleteImageAction = async (path: string, userUID: string | undefined, fileName: string,) => {
+    const response = await deleteImageAccess(path, userUID, fileName)
     return response
 }

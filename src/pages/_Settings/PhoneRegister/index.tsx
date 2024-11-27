@@ -32,7 +32,7 @@ export default function PhoneRegister() {
 
     return validationCode ?
         (
-            <Navigate to="/settings/phoneregister/validationcode" />
+            <Navigate to="/settings/phone-register/validation-code" />
         ) :
         (
 

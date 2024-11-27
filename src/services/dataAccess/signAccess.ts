@@ -1,31 +1,28 @@
 import { signInWithPopup, UserCredential, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
 import { auth, provider } from "../firebaseConfig";
-import { addUsersAction, getUsersAction } from "../actions/usersAction";
+import { addUsersAction, getUsersAction, setUsersAction } from "../actions/usersAction";
 import { DataUserType } from "../actions/signAction";
+import { authEmailAction } from "../actions/emailAction";
 
 export const signInWithGoogleAccess = async (): Promise<UserCredential> => {
   return await signInWithPopup(auth, provider)
     .then(async result => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const dataUser = await getUsersAction('email', '==', result.user.email)
-      console.log('ok1')
       if (!dataUser) {
-        console.log('ok2')
         const fullName = result.user.displayName?.split(' ')
         const name = fullName ? fullName[0] : ''
         const surname = fullName && fullName[1] ? fullName[1] : ''
-        console.log(name)
-        console.log(surname)
 
         const user = {
           name: name,
           surname: surname,
           email: result.user.email,
-          avatar: result.user.photoURL,
+          avatar: {name: 'profile', url: result.user.photoURL},
           userUID: result.user.uid
         }
 
-        await addUsersAction(user)
+        await setUsersAction(result.user.uid, user)
       }
       return credential;
 
@@ -46,7 +43,9 @@ export const signUpAccess = async (data: DataUserType) => {
       displayName: data.name.charAt(0).toUpperCase() + data.name.slice(1) + " " + data.surname.charAt(0).toUpperCase() + data.surname.slice(1)
     })
 
-    await addUsersAction({ ...dataUser, uid: userCredential.user.uid })
+    await setUsersAction(userCredential.user.uid, { ...dataUser, uid: userCredential.user.uid })
+
+    await authEmailAction(userCredential.user)
 
   } catch (error) {
     throw error

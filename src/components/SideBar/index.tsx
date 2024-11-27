@@ -32,7 +32,7 @@ export default function SideBar() {
                         </Link>
 
                         <Link
-                            to="/createproduct"
+                            to="/create-product"
                             className="text-decoration-none"
                         >
                             <List

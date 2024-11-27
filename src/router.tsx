@@ -14,6 +14,7 @@ import PhoneRegister from "./pages/_Settings/PhoneRegister/index.js";
 import PhoneRegisterLayout from "./layouts/PhoneRegisterLayout/index.tsx";
 import ValidationCode from "./pages/_Settings/PhoneRegister/ValidationCode/index.tsx";
 import { PrimeReactProvider } from 'primereact/api';
+import { EmailVerificationProvider } from "./Context/EmailVerificationContext.tsx";
 
 export const AppRoutes = () => {
     return (
@@ -33,13 +34,13 @@ export const AppRoutes = () => {
                     </PrimeReactProvider>
                 }>
                     <Route index={true} element={<DashBoard />} />
-                    <Route path="/createproduct" element={<Product />} />
+                    <Route path="/create-product" element={<Product />} />
                     <Route path="/stocks" element={<Stocks />} />
-                    <Route path="/stocks/createstock" element={<CreateStock />} />
+                    <Route path="/stocks/create-stock" element={<CreateStock />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route element={<PhoneRegisterLayout />} >
-                        <Route path="/settings/phoneregister/form" element={<PhoneRegister />} />
-                        <Route path="/settings/phoneregister/validationcode" element={<ValidationCode />} />
+                        <Route path="/settings/phone-register/form" element={<PhoneRegister />} />
+                        <Route path="/settings/phone-register/validation-code" element={<ValidationCode />} />
                     </Route>
 
                 </Route>
@@ -47,7 +48,9 @@ export const AppRoutes = () => {
                 <Route path="/login" element={
                     <AuthProvider>
                         <RedirectHome>
-                            <Login />
+                            <EmailVerificationProvider>
+                                <Login />
+                            </EmailVerificationProvider>
                         </RedirectHome>
                     </AuthProvider>
                 } />

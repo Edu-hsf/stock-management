@@ -2,18 +2,16 @@ import "./styles.scss"
 import { ChangeEvent, useContext, useEffect, useState } from "react"
 import { FormGroup } from "@/components/FormGroup"
 import userDefault from "@/assets/user-default.png"
-// import PhoneInput from 'react-phone-number-input'
-// import 'react-phone-number-input/style.css'
 import { AuthContext } from "@/Context/AuthContext"
 import { getUsersAction, updateUsersAction } from "@/services/actions/usersAction"
 import { DocumentData } from "firebase/firestore"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { profileSettingsSchema } from "./settingsSchema"
 import { deleteImageAction, uploadImageAction } from "@/services/actions/imagesAction"
-
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { Link } from "react-router-dom"
+import { StyledLoader } from "../Loader"
 
 interface ProfileSettingsType {
     name: string,
@@ -26,10 +24,10 @@ interface ProfileSettingsType {
 export default function ProfileSettings() {
     const { userSession } = useContext(AuthContext)!
     const [userDataBase, setUserDatabase] = useState<DocumentData | null>(null)
-    const { register, setValue, formState: { errors }, handleSubmit, control, getValues } = useForm<ProfileSettingsType>(profileSettingsSchema)
+    const { register, setValue, formState: { errors }, handleSubmit } = useForm<ProfileSettingsType>(profileSettingsSchema)
     const [avatarPreview, setAvatarPreview] = useState<File | null>(null)
-    const [phone, setPhone] = useState('');
-    console.log(userDataBase?.data.phone)
+    const [loading, setLoading] = useState(false)
+    const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -49,6 +47,8 @@ export default function ProfileSettings() {
 
     const dataProfile: SubmitHandler<ProfileSettingsType> = async (data) => {
         const { name, surname, email, phone, avatar } = data
+        setLoading(true)
+
         if (avatar) {
             const imgURL = await uploadImageAction('profile-pictures', userSession.user?.uid, avatar, 'profile')
 
@@ -56,6 +56,8 @@ export default function ProfileSettings() {
         } else {
             await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname, email, phone: phone || '' })
         }
+
+        window.location.reload()
     }
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +67,7 @@ export default function ProfileSettings() {
     };
 
     const deleteAvatar = async () => {
-        await deleteImageAction('profile-pictures', userSession.user?.uid, userDataBase?.data.avatar, 'profile')
+        await deleteImageAction('profile-pictures', userSession.user?.uid, 'profile')
         await updateUsersAction(userDataBase?.id, { avatar: 'default' })
         setAvatarPreview(null)
         window.location.reload()
@@ -147,15 +149,14 @@ export default function ProfileSettings() {
                                             inputClassName="form-control"
                                         />
                                     </div>
-                                    <div className="col">
-                                        <button className="validation-button btn btn-light-green">Register new phone number</button>
-                                    </div>
+                                    <Link to="/settings/phone-register/form" className="col">
+                                        <button className="validation-button btn btn-light-green">Change phone number</button>
+                                    </Link>
                                 </div>
                                 :
-                                <Link to="/settings/phoneregister/form">
+                                <Link to="/settings/phone-register/form">
                                     <button className="validation-button btn btn-light-green">Register phone number</button>
                                 </Link>
-
                             }
                         </div>
                     </div>
@@ -186,7 +187,22 @@ export default function ProfileSettings() {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-orange">Save changes</button>
+                <button
+                    type="submit"
+                    className="btn btn-orange d-flex align-items-center gap-2 btn-save"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
+                    Save changes
+
+                    {loading &&
+                        <StyledLoader
+                            loaderColor={isHovered ? "#fff" : "var(--light-green)"}
+                            loaderWidth="20px"
+                            loaderHeight="20px"
+                            loaderThickness="3px"
+                        />}
+                </button>
             </form>
             <hr />
         </div>

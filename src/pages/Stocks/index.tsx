@@ -42,7 +42,7 @@ export default function Stocks() {
         <div id="stocks" className="container-fluid px-4 pt-2">
             <Title className='d-flex justify-content-between'>
                 Your stocks
-                <Link to='/stocks/createstock'>
+                <Link to='/stocks/create-stock'>
                     <button className="btn btn-orange me-3">
                         Create new stock
                     </button>

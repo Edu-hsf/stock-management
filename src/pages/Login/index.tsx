@@ -4,7 +4,9 @@ import { StyledLogin } from "@/components/Login/Login.styles"
 import SignIn from "@/components/Login/Content/Sign-in"
 import SignUp from "@/components/Login/Content/Sign-up"
 import banner from '@/assets/login-banner.png'
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { EmailVerificationContext } from "@/Context/EmailVerificationContext"
+import EmailVerification from "@/components/EmailVerification"
 
 export interface MoveType {
     setMove_x?: React.Dispatch<React.SetStateAction<string>>
@@ -14,10 +16,13 @@ export interface MoveType {
 }
 
 export default function Login() {
+    const { emailVerification } = useContext(EmailVerificationContext)!
     const [move_x, setMove_x] = useState('right')
     const [move_y, setMove_y] = useState('top')
 
-    return (
+    return emailVerification ? (
+        <EmailVerification/>
+    ) : (
         <StyledLogin>
             <StyledContent>
                 <div className='d-flex justify-content-center align-items-center'>

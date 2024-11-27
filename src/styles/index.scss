@@ -35,6 +35,16 @@ body {
     }
 }
 
+.btn-solid-orange {
+    background-color: var(--orange);
+    color: #fff;
+}
+
+.btn-solid-light-green {
+    background-color: var(--light-green);
+    color: #fff;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }
@@ -51,4 +61,8 @@ body {
 
 .text-light-green {
     color: var(--light-green);
+}
+
+.text-orange {
+    color: var(--orange);
 }
