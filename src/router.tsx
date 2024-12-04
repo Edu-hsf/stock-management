@@ -10,11 +10,9 @@ import CreateStock from "./pages/Stocks/CreateStock/index.tsx";
 import { StockListProvider } from "./Context/UserStockList.tsx";
 import { ProductListProvider } from "./Context/ProductListContext.tsx";
 import Settings from "./pages/_Settings/index..js";
-import PhoneRegister from "./pages/_Settings/PhoneRegister/index.js";
-import PhoneRegisterLayout from "./layouts/PhoneRegisterLayout/index.tsx";
-import ValidationCode from "./pages/_Settings/PhoneRegister/ValidationCode/index.tsx";
 import { PrimeReactProvider } from 'primereact/api';
-import { EmailVerificationProvider } from "./Context/EmailVerificationContext.tsx";
+import EmailRegister from "./pages/_Settings/EmailRegister/index.tsx";
+import ChangePassword from "./pages/_Settings/ChangePassword/index.tsx";
 
 export const AppRoutes = () => {
     return (
@@ -38,19 +36,14 @@ export const AppRoutes = () => {
                     <Route path="/stocks" element={<Stocks />} />
                     <Route path="/stocks/create-stock" element={<CreateStock />} />
                     <Route path="/settings" element={<Settings />} />
-                    <Route element={<PhoneRegisterLayout />} >
-                        <Route path="/settings/phone-register/form" element={<PhoneRegister />} />
-                        <Route path="/settings/phone-register/validation-code" element={<ValidationCode />} />
-                    </Route>
-
+                    <Route path="/settings/email-register" element={<EmailRegister />} />
+                    <Route path="/settings/change-password" element={<ChangePassword />} />
                 </Route>
 
                 <Route path="/login" element={
                     <AuthProvider>
                         <RedirectHome>
-                            <EmailVerificationProvider>
                                 <Login />
-                            </EmailVerificationProvider>
                         </RedirectHome>
                     </AuthProvider>
                 } />

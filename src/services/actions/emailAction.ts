@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { authEmailAccess, emailIsValidAccess } from "../dataAccess/emailAccess";
+import { authEmailAccess, changeUserEmailAccess, emailIsValidAccess } from "../dataAccess/emailAccess";
 
 export const authEmailAction = async (user: User) => {
     const response = await authEmailAccess(user)
@@ -8,5 +8,10 @@ export const authEmailAction = async (user: User) => {
 
 export const emailIsValidAction = async (email: string) => {
     const response = await emailIsValidAccess(email)
+    return response
+};
+
+export const changeUserEmailAction = async (user: User, newEmail: string) => {
+    const response = await changeUserEmailAccess(user, newEmail)
     return response
 };

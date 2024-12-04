@@ -1,5 +1,10 @@
-import { sendEmailVerification, User } from "firebase/auth";
+import {
+    sendEmailVerification,
+    User,
+    verifyBeforeUpdateEmail
+} from "firebase/auth";
 import axios from 'axios';
+
 
 export const emailIsValidAccess = async (email: string) => {
     const apiKey = "2893c3642634970fae06f295806a73cdab412171";
@@ -25,3 +30,13 @@ export const authEmailAccess = async (user: User) => {
         console.error("Erro ao enviar o e-mail de verificação:", error);
     }
 };
+
+
+
+export const changeUserEmailAccess = async (user: User, newEmail: string) => {
+    await verifyBeforeUpdateEmail(user, newEmail, {
+        url: "http://localhost:5173/", // URL de redirecionamento após a verificação
+        handleCodeInApp: true, // Garantir que o link será tratado no app, se aplicável
+    })
+}
+

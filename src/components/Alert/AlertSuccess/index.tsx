@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertType, StyledAlertSuccess } from "../Alert.styles";
+import { StyledAlertSuccess } from "../Alert.styles";
 import { ComponentProps } from "@/interfaces";
 
 type DirectionTypes = 'up' | 'down'
@@ -14,7 +14,7 @@ export default function AlertSuccess ({ children, className }: ComponentProps) {
     }, 300);
 
     setTimeout(() => {
-        if (direction === 'down') {
+        if (direction === 'up') {
             setDirection('up')
         }
     }, 3000);

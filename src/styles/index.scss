@@ -50,7 +50,7 @@ body {
 }
 
 .error-input {
-    border: 1px solid rgb(253, 71, 71);
+    border-color: rgb(253, 71, 71);
 }
 
 .error-message {
@@ -65,4 +65,30 @@ body {
 
 .text-orange {
     color: var(--orange);
+}
+
+.form-control {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    
+    &:focus {
+        border-color: #CED4DA;
+        box-shadow: none;
+    }
+}
+
+.input-group-text {
+    background-color: #fff;
+    border-radius: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    color: silver;
+    cursor: pointer;
+
+    .fa-eye {
+        color: rgb(97, 97, 97);
+    }
 }

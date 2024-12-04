@@ -5,8 +5,8 @@ import SignIn from "@/components/Login/Content/Sign-in"
 import SignUp from "@/components/Login/Content/Sign-up"
 import banner from '@/assets/login-banner.png'
 import { useContext, useState } from "react"
-import { EmailVerificationContext } from "@/Context/EmailVerificationContext"
 import EmailVerification from "@/components/EmailVerification"
+import { AuthContext } from "@/Context/AuthContext"
 
 export interface MoveType {
     setMove_x?: React.Dispatch<React.SetStateAction<string>>
@@ -16,12 +16,12 @@ export interface MoveType {
 }
 
 export default function Login() {
-    const { emailVerification } = useContext(EmailVerificationContext)!
+    const { userSession } = useContext(AuthContext)!
     const [move_x, setMove_x] = useState('right')
     const [move_y, setMove_y] = useState('top')
 
-    return emailVerification ? (
-        <EmailVerification/>
+    return userSession.user && !userSession.user?.emailVerified  ? (
+        <EmailVerification email={userSession.user?.email!}/>
     ) : (
         <StyledLogin>
             <StyledContent>

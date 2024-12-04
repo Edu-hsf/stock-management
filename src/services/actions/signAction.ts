@@ -1,4 +1,5 @@
-import { logOutAccess, signInAccess, signInWithGoogleAccess, signUpAccess } from "../dataAccess/signAccess"
+import { User } from "firebase/auth"
+import { logOutAccess, reAuthUserAccess, signInAccess, signInWithGoogleAccess, signUpAccess, updatePasswordAccess } from "../dataAccess/signAccess"
 export interface DataUserType {
     name: string,
     surname: string,
@@ -22,6 +23,15 @@ export const signUpAction = async (data: DataUserType) => {
     return response
 }
 
+export const reAuthUserAction = async (user: User, password: string) => {
+    const response = await reAuthUserAccess(user, password)
+    return response
+}
+
+export const updatePasswordAction = async (user: User, password: string) => {
+    const response = await updatePasswordAccess(user, password)
+    return response
+}
 export const LogOutAction = async () => {
     const response = await logOutAccess()
     return response

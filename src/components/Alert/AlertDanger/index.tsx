@@ -12,7 +12,7 @@ export default function AlertDanger ({ children, className }: ComponentProps) {
     }, 300);
 
     setTimeout(() => {
-        if (direction === 'down') {
+        if (direction === 'up') {
             setDirection('up')
         }
     }, 3000);

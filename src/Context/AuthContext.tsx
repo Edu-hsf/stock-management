@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { auth } from '@/services/firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { ComponentProps, } from '@/interfaces';
+import { updateUsersAction } from '@/services/actions/usersAction';
 
 export interface AuthContextType {
     userSession: {
@@ -26,6 +27,7 @@ export const AuthProvider = ({ children }: ComponentProps) => {
     async function initializeUser (user: User | null) {
         if (user) {
             setUserSession({ user })
+            await updateUsersAction(user.uid, { email: user.email })
             setLoading(false)
         } else {
             setUserSession({ user: null })

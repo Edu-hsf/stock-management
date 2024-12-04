@@ -1,9 +1,5 @@
-#validationCode {
-    .banner {
-        img {
-            width: 200px;
-        }
-    }
+.content {
+    
 
     p {
         color: rgb(144, 143, 143);
@@ -14,5 +10,9 @@
         justify-content: center;       // Centraliza horizontalmente
         align-items: center;           // Alinha verticalmente, mas como você não quer, pode removê-lo
         width: 100%;                   // Garante que ocupe 100% da largura disponível
+    }
+
+    .disabled {
+        color: rgb(144, 143, 143)
     }
 }

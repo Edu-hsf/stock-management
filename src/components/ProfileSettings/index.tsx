@@ -16,8 +16,6 @@ import { StyledLoader } from "../Loader"
 interface ProfileSettingsType {
     name: string,
     surname: string,
-    email: string,
-    phone: string,
     avatar: File | undefined
 }
 
@@ -37,24 +35,22 @@ export default function ProfileSettings() {
             if (user?.data) {
                 setValue("name", user.data.name || "");
                 setValue("surname", user.data.surname || "");
-                setValue("email", user.data.email || "");
                 setValue("avatar", undefined)
-                setValue("phone", user.data.phone || "");
             }
         }
         fetchUser()
     }, [])
 
     const dataProfile: SubmitHandler<ProfileSettingsType> = async (data) => {
-        const { name, surname, email, phone, avatar } = data
+        const { name, surname, avatar } = data
         setLoading(true)
 
         if (avatar) {
             const imgURL = await uploadImageAction('profile-pictures', userSession.user?.uid, avatar, 'profile')
 
-            await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname, email, phone, avatar: { name: avatar.name, url: imgURL } })
+            await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname, avatar: { name: avatar.name, url: imgURL } })
         } else {
-            await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname, email, phone: phone || '' })
+            await updateUsersAction(userDataBase?.id, { name: name.toLowerCase(), surname })
         }
 
         window.location.reload()
@@ -104,60 +100,40 @@ export default function ProfileSettings() {
                         <div className="mt-2">
                             <FormGroup.Root>
                                 <FormGroup.Label text='Email' />
-                                <FormGroup.Input
-                                    type="text"
-                                    {...register('email')}
-                                />
-                                <FormGroup.ErrorMessage text={errors.email?.message} />
+                                <div className="row">
+                                    <div className="col">
+                                        <FormGroup.Input
+                                            type="text"
+                                            value={userDataBase?.data.email}
+                                            disabled
+                                        />
+                                    </div>
+
+                                    <div className="col">
+                                        <Link to={'/settings/email-register'}>
+                                            <button className="btn btn-light-green">Change email</button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </FormGroup.Root>
                         </div>
                         <div className="mt-2 pt-2">
-                            {/* <FormGroup.Root>
-                                <FormGroup.Label text='Number' />
-                                <Controller
-                                    name="phone"
-                                    control={control}
-                            
-                                    render={({ field }) => (
-                                        <PhoneInput
-                                            {...field}
-                                            defaultCountry="US"
-                                            international
-                                            countryCallingCodeEditable={false}
-                                            placeholder="Enter phone number"
-                                            onChange={(value) => field.onChange(value)}
-                            
-                                        />
-                                    )}
-                                />
-                                <PhoneInput
-                                    defaultCountry="eua"
-                                    value={phone}
-                                    onChange={(phone) => setPhone(phone)}
-                                    inputClassName="form-control"
-                                />
-                                <FormGroup.ErrorMessage text={errors.phone?.message} />
-                            </FormGroup.Root> */}
+                            <FormGroup.Label text='Password' />
+                            <div className="row">
+                                <div className="col">
+                                    <FormGroup.Input
+                                        type="text"
+                                        value="**********"
+                                        disabled
+                                    />
+                                </div>
 
-                            {userDataBase?.data.phone ?
-                                <div className="row">
-                                    <div className="col">
-                                        <PhoneInput
-                                            defaultCountry="eua"
-                                            value={userDataBase?.data.phone}
-                                            disabled
-                                            inputClassName="form-control"
-                                        />
-                                    </div>
-                                    <Link to="/settings/phone-register/form" className="col">
-                                        <button className="validation-button btn btn-light-green">Change phone number</button>
+                                <div className="col">
+                                    <Link to="/settings/change-password">
+                                        <button className="validation-button btn btn-light-green">Change password</button>
                                     </Link>
                                 </div>
-                                :
-                                <Link to="/settings/phone-register/form">
-                                    <button className="validation-button btn btn-light-green">Register phone number</button>
-                                </Link>
-                            }
+                            </div>
                         </div>
                     </div>
                     <div className="col-2 d-flex flex-column align-items-center gap-2">
@@ -189,7 +165,7 @@ export default function ProfileSettings() {
 
                 <button
                     type="submit"
-                    className="btn btn-orange d-flex align-items-center gap-2 btn-save"
+                    className="btn btn-orange d-flex align-items-center gap-2"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -197,7 +173,7 @@ export default function ProfileSettings() {
 
                     {loading &&
                         <StyledLoader
-                            loaderColor={isHovered ? "#fff" : "var(--light-green)"}
+                            loaderColor={isHovered ? "#fff" : "var(--orange)"}
                             loaderWidth="20px"
                             loaderHeight="20px"
                             loaderThickness="3px"

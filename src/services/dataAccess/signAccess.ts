@@ -1,6 +1,18 @@
-import { signInWithPopup, UserCredential, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+import {
+  signInWithPopup,
+  UserCredential,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  signOut,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  User,
+  updatePassword
+} from "firebase/auth";
 import { auth, provider } from "../firebaseConfig";
-import { addUsersAction, getUsersAction, setUsersAction } from "../actions/usersAction";
+import { getUsersAction, setUsersAction } from "../actions/usersAction";
 import { DataUserType } from "../actions/signAction";
 import { authEmailAction } from "../actions/emailAction";
 
@@ -18,7 +30,7 @@ export const signInWithGoogleAccess = async (): Promise<UserCredential> => {
           name: name,
           surname: surname,
           email: result.user.email,
-          avatar: {name: 'profile', url: result.user.photoURL},
+          avatar: { name: 'profile', url: result.user.photoURL },
           userUID: result.user.uid
         }
 
@@ -60,6 +72,16 @@ export const signInAccess = async (email: string, password: string) => {
     throw error;
   }
 
+}
+
+export const reAuthUserAccess = async (user: User, password: string) => {
+  const credential = EmailAuthProvider.credential(user.email!, password);
+
+  await reauthenticateWithCredential(user, credential);
+}
+
+export const updatePasswordAccess = async (user: User, newPassword: string) => {
+  await updatePassword(user, newPassword)
 }
 
 export const logOutAccess = async () => {
